@@ -1,0 +1,1 @@
+Begun experimenting with textmesh pro and unity's canvas system
