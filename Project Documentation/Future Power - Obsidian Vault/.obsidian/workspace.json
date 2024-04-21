@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Immediate tasks.md",
+                "file": "Overview/Immediate tasks.md",
                 "mode": "source",
                 "source": false
               }
@@ -25,14 +25,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Ui Work.md",
+                "file": "Current Work/Ui Work.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "73823704c987ec56",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Current Work/Generator Status.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -98,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Ui Work.md",
+                "file": "Current Work/Generator Status.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Ui Work.md",
+                "file": "Current Work/Generator Status.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Ui Work.md"
+                "file": "Current Work/Generator Status.md"
               }
             }
           }
@@ -159,10 +171,15 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "1f44ab8857ce1c30",
+  "active": "10b2fbfbd8a141fb",
   "lastOpenFiles": [
-    "Immediate tasks.md",
-    "Ui Work.md",
-    "Overview.md"
+    "Completed Work",
+    "Current Work/Ui Work.md",
+    "Current Work/Generator Status.md",
+    "Overview/Immediate tasks.md",
+    "Overview",
+    "Overview/Overview.md",
+    "Current Work",
+    "Pasted image 20240421110459.png"
   ]
 }
