@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Current Work/Generator Status.md",
+                "file": "Current Work/Ui Work.md",
                 "mode": "source",
                 "source": false
               }
@@ -110,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Current Work/Generator Status.md",
+                "file": "Current Work/Ui Work.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Current Work/Generator Status.md",
+                "file": "Current Work/Ui Work.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Current Work/Generator Status.md"
+                "file": "Current Work/Ui Work.md"
               }
             }
           }
@@ -171,11 +171,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "10b2fbfbd8a141fb",
+  "active": "73823704c987ec56",
   "lastOpenFiles": [
+    "Current Work/Generator Status.md",
+    "Pasted image 20240421212613.png",
     "Completed Work",
     "Current Work/Ui Work.md",
-    "Current Work/Generator Status.md",
     "Overview/Immediate tasks.md",
     "Overview",
     "Overview/Overview.md",

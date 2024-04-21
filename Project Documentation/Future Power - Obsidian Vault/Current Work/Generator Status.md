@@ -20,3 +20,10 @@ void updatePower()
     }
 
 ```
+
+
+The bulk of the generators editable data (and likely every component to come) is handled by Scriptable Objects, in this case Power Gen components specifying a name, maximum generation capacity and response speed.
+
+![[Pasted image 20240421212613.png]]
+
+We also define a prefab for each type so that we can allow the player to later spawn any generator component they want for the variety of situation. Currently this is non functional unsurprisingly.

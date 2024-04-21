@@ -18,12 +18,6 @@ public class basicTestCam : MonoBehaviour
     {
         transform.position += transform.forward * Input.GetAxis("Vertical") * speed * Time.deltaTime;
         transform.position += transform.right * Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-        transform.position += Vector3.up * Input.GetAxis("Jump") * speed * Time.deltaTime;
-        transform.position += Vector3.up * Input.GetAxis("Jump") * speed * Time.deltaTime;
-        
-
-        // float mouseX = Input.GetAxis("Mouse X");
-        // float mouseY = Input.GetAxis("Mouse Y");
-        // transform.eulerAngles += new Vector3(-mouseY * sensitivity, mouseX * sensitivity, 0);
+        transform.position += Vector3.up * Input.GetAxis("Jump") * speed * Time.deltaTime;       
     }
 }
