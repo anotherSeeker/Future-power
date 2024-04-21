@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7660bb73c64bc6446916ce7cc5ea7af4, type: 3}
   m_Name: Coal Generator
   m_EditorClassIdentifier: 
-  GenName: Default Generator
+  GenName: Coal Generator
   genCapacity: 450
   responseSpeed: 50
