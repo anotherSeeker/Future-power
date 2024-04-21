@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Current Work/Ui Work.md",
+                "file": "Overview/Immediate tasks.md",
                 "mode": "source",
                 "source": false
               }
@@ -110,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Current Work/Ui Work.md",
+                "file": "Overview/Immediate tasks.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Current Work/Ui Work.md",
+                "file": "Overview/Immediate tasks.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Current Work/Ui Work.md"
+                "file": "Overview/Immediate tasks.md"
               }
             }
           }
@@ -173,13 +173,14 @@
   },
   "active": "73823704c987ec56",
   "lastOpenFiles": [
-    "Current Work/Generator Status.md",
+    "Overview/Overview.md",
+    "Overview/Immediate tasks.md",
+    "Current Work/Power Consumer prototype.md",
+    "Current Work/Ui Work.md",
+    "Completed Work/Generator Prototype.md",
     "Pasted image 20240421212613.png",
     "Completed Work",
-    "Current Work/Ui Work.md",
-    "Overview/Immediate tasks.md",
     "Overview",
-    "Overview/Overview.md",
     "Current Work",
     "Pasted image 20240421110459.png"
   ]
