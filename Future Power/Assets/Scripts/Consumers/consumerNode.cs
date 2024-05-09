@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class consumerNode : MonoBehaviour
 {
-    [SerializeField] private powerCons consumer;
+    [SerializeField] private powerCons consumer; 
 
     private bool toggleState = false;
 
@@ -20,6 +20,7 @@ public class consumerNode : MonoBehaviour
     {
         if (toggleState)
         {
+            print("real");
             return consumer.powerDraw;
         }
         return 0f;

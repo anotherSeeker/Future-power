@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 
-
 public class powerGeneratorNode : MonoBehaviour
 {
     [SerializeField] private powerGen generator;
@@ -15,7 +14,7 @@ public class powerGeneratorNode : MonoBehaviour
     private float desiredGeneration = 0f;
 
     //num between 0 and 1 determining our current power output
-    [SerializeField] private float currentGeneration = 0f;
+    [SerializeField] private float currentGeneration = 0f; 
 
     public TextMeshProUGUI genName;
     public TextMeshProUGUI genDescription;
@@ -45,5 +44,10 @@ public class powerGeneratorNode : MonoBehaviour
     public void updateTargetPower(float newTarget)
     {
         targetGeneration = newTarget;
+    }
+
+    public float getCurrentPower()
+    {
+        return currentGeneration;
     }
 }
