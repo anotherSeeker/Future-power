@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Overview/Immediate tasks.md",
+                "file": "Current Work/Power Consumer prototype.md",
                 "mode": "source",
                 "source": false
               }
@@ -110,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Overview/Immediate tasks.md",
+                "file": "Current Work/Power Consumer prototype.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Overview/Immediate tasks.md",
+                "file": "Current Work/Power Consumer prototype.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Overview/Immediate tasks.md"
+                "file": "Current Work/Power Consumer prototype.md"
               }
             }
           }
@@ -173,10 +173,10 @@
   },
   "active": "73823704c987ec56",
   "lastOpenFiles": [
-    "Overview/Overview.md",
-    "Overview/Immediate tasks.md",
-    "Current Work/Power Consumer prototype.md",
     "Current Work/Ui Work.md",
+    "Overview/Immediate tasks.md",
+    "Overview/Overview.md",
+    "Current Work/Power Consumer prototype.md",
     "Completed Work/Generator Prototype.md",
     "Pasted image 20240421212613.png",
     "Completed Work",
