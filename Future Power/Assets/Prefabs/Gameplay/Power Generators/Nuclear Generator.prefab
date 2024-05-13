@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 7553037887921672346}
   - component: {fileID: 8283938764610633913}
   m_Layer: 0
-  m_Name: Solar Generator
+  m_Name: Nuclear Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -333,7 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e014b595a66581d469f85e8b6538a978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generator: {fileID: 11400000, guid: ab4bc75d5071f0044bdd556a18081c56, type: 2}
+  generator: {fileID: 11400000, guid: 2a03d14d0ba4d634a84884157ef5f3d7, type: 2}
   targetGeneration: 0
   currentGeneration: 0
   genName: {fileID: 1739817705460920948}

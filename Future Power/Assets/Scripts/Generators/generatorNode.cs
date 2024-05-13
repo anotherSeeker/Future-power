@@ -1,9 +1,10 @@
 using TMPro;
 using UnityEngine;
 
-public class powerGeneratorNode : MonoBehaviour
+public class GeneratorNode : MonoBehaviour
 {
     [SerializeField] private powerGen generator;
+    [SerializeField] private bool noGenerator;
     private float maxPower;
     private float responseSpeed;
 
@@ -21,23 +22,27 @@ public class powerGeneratorNode : MonoBehaviour
 
     void Start()
     {
-        maxPower = generator.genCapacity;
-        responseSpeed = generator.responseSpeed;
+        if (!noGenerator)
+        {
+            maxPower = generator.genCapacity;
+            responseSpeed = generator.responseSpeed;
 
-        genName.text = generator.GenName;
-        genDescription.text = "Target Power: "+desiredGeneration+"\nCurrent Power: "+currentGeneration; 
+            genName.text = generator.GenName;
+            genDescription.text = "Target Power: "+desiredGeneration.ToString("F2")+"\nCurrent Power: "+currentGeneration.ToString("F2"); 
+        }
     }
     
     void Update()
     {
-        updatePower();
+        if (!noGenerator)
+            updatePower();
     }
 
     void updatePower()
     {
         desiredGeneration = maxPower * targetGeneration;
         currentGeneration = Mathf.MoveTowards(currentGeneration, desiredGeneration, responseSpeed * Time.deltaTime);
-        genDescription.text = "Target Power: "+desiredGeneration+"\nCurrent Power: "+currentGeneration;
+        genDescription.text = "Target Power: "+desiredGeneration.ToString("F2")+"\nCurrent Power: "+currentGeneration.ToString("F2");
     }
 
     //Called when we change the target power slider on the ui
@@ -49,5 +54,10 @@ public class powerGeneratorNode : MonoBehaviour
     public float getCurrentPower()
     {
         return currentGeneration;
+    }
+
+    public string GetName()
+    {
+        return generator.GenName;
     }
 }

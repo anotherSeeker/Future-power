@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7660bb73c64bc6446916ce7cc5ea7af4, type: 3}
   m_Name: Solar Generator
   m_EditorClassIdentifier: 
-  GenName: Solar Generator
+  GenName: Solar
   genCapacity: 250
-  responseSpeed: 100
+  responseSpeed: 70

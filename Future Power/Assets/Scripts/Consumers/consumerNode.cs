@@ -1,9 +1,9 @@
 using TMPro;
 using UnityEngine;
 
-public class consumerNode : MonoBehaviour
+public class ConsumerNode : MonoBehaviour
 {
-    [SerializeField] private powerCons consumer; 
+    [SerializeField] private PowerCons consumer; 
 
     private bool toggleState = false;
 
@@ -13,16 +13,14 @@ public class consumerNode : MonoBehaviour
     void Start()
     {
         genName.text = consumer.ConsumerName;
-        genDescription.text = consumer.powerDraw+"MW\n"+getRequestedPower()+"MW"; 
+        genDescription.text = consumer.powerDraw+"MW"; 
     }
 
     public float getRequestedPower()
     {
         if (toggleState)
-        {
-            print("real");
             return consumer.powerDraw;
-        }
+
         return 0f;
     }
 
@@ -30,6 +28,6 @@ public class consumerNode : MonoBehaviour
     public void setState(bool state)
     {
         toggleState = state;
-        genDescription.text = consumer.powerDraw+"MW\n"+getRequestedPower()+"MW"; 
+        genDescription.text = consumer.powerDraw+"MW"; 
     }
 }

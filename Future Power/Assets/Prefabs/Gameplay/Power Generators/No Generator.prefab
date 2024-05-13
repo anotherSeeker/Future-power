@@ -228,7 +228,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 4370900390221564143}
   m_FillRect: {fileID: 6140709800983130831}
   m_HandleRect: {fileID: 5940492927393141734}
@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 7553037887921672346}
   - component: {fileID: 8283938764610633913}
   m_Layer: 0
-  m_Name: Solar Generator
+  m_Name: No Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -333,7 +333,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e014b595a66581d469f85e8b6538a978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generator: {fileID: 11400000, guid: ab4bc75d5071f0044bdd556a18081c56, type: 2}
+  generator: {fileID: 11400000, guid: bcbcc1f219b15274caabc2f2a18ee05a, type: 2}
+  noGenerator: 1
   targetGeneration: 0
   currentGeneration: 0
   genName: {fileID: 1739817705460920948}
@@ -514,7 +515,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Description
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -723,7 +724,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Name
+  m_text: None
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
