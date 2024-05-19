@@ -22,8 +22,8 @@ public class GeneratorController : MonoBehaviour
         
         foreach (Transform child in children)
         {   
-            if (child.GetComponent<GeneratorNode>())             
-                power = power + child.GetComponent<GeneratorNode>().getCurrentPower();
+            if (child.GetComponent<GenNodeController>())             
+                power = power + child.GetComponent<GenNodeController>().getCurrentPower();
         }
 
         return power;

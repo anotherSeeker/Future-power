@@ -10,7 +10,6 @@ public class GameBoard : MonoBehaviour
     private float genPower = 0f;
     private float reqPower = 0f;
 
-
     [SerializeField] bool overloaded = false;
     //We "overload" when our power*overloadRatio + overloardBuffer
     [SerializeField] float overloadBuffer = 50f;

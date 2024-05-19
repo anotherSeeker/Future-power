@@ -10,14 +10,35 @@ public class GenNodeController : MonoBehaviour
     void Start()
     {
         populateDropdown();
+
+        //sets the dropdown to the default value, index 0 in the list
+        defaultDropdown();
     }
 
-    private void ChangeNode(GameObject newChild)
+
+    public void populateDropdown()
     {
+        foreach(GameObject gen in generators)
+        {
+            dropdown.options.Add(new TMP_Dropdown.OptionData(gen.GetComponent<GeneratorNode>().GetName(), null));
+        }
+    }
+    
+    private void defaultDropdown()
+    {
+        dropdown.value = 0;
+        ChangeNode();
+    }
+
+    public void ChangeNode()
+    {
+        //Called OnValueChanged()
+        int newChild = dropdown.value;
+
         Transform childGenerator = GetCurrentGen(transform);
         Destroy(childGenerator.gameObject);
 
-        Instantiate(newChild, transform);
+        Instantiate(generators[newChild], transform);
     }
 
     private Transform GetCurrentGen(Transform parent)
@@ -34,17 +55,31 @@ public class GenNodeController : MonoBehaviour
         return null;
     }
 
-    public void populateDropdown()
+
+
+    public float getCurrentPower()
     {
-        foreach(GameObject gen in generators)
-        {
-            dropdown.options.Add(new TMP_Dropdown.OptionData(gen.GetComponent<GeneratorNode>().GetName(), null));
+        List<Transform> children = GetChildren(transform);
+        float power = 0;
+
+        foreach (Transform child in children)
+        {   
+            if (child.GetComponent<GeneratorNode>())             
+                power = power + child.GetComponent<GeneratorNode>().getCurrentPower();
         }
+
+        return power;
     }
 
-    public void NodeDropdown(int index)
+    private List<Transform> GetChildren(Transform parent)
     {
-        
-    }
+        List<Transform> children = new List<Transform>();
 
+        foreach(Transform child in parent)
+        {
+            children.Add(child);
+        }
+
+        return children;
+    }
 }
