@@ -11,3 +11,8 @@ will need a system to save and setup "scenarios"
 	must use z generators 
 	the required consumer nodes 
 		displaying which need to be powered
+
+
+![[original back.jpg]]
+![[original front.jpg]]
+Convert old physical interface into purely digital one, readability, usability and aesthetics are important in that order

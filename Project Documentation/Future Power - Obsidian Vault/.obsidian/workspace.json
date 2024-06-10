@@ -13,6 +13,18 @@
             "state": {
               "type": "markdown",
               "state": {
+                "file": "Completed Work/Generator Prototype.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "e6ac86c765afa589",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
                 "file": "Completed Work/System Architecture.md",
                 "mode": "source",
                 "source": false
@@ -25,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Completed Work/Generator Prototype.md",
+                "file": "Overview/Overview.md",
                 "mode": "source",
                 "source": false
               }
@@ -97,7 +109,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Completed Work/System Architecture.md",
+                "file": "Completed Work/Generator Prototype.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -114,7 +126,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Completed Work/System Architecture.md",
+                "file": "Completed Work/Generator Prototype.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -137,7 +149,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Completed Work/System Architecture.md"
+                "file": "Completed Work/Generator Prototype.md"
               }
             }
           }
@@ -160,16 +172,18 @@
   },
   "active": "ad3d7bc0884ab25c",
   "lastOpenFiles": [
-    "Completed Work/Generator Prototype.md",
     "Completed Work/System Architecture.md",
-    "Pasted image 20240610155635.png",
-    "Completed Work/Prototype Ui Work - done.md",
-    "Completed Work/Power Consumer prototype.md",
-    "Current Work/3d scene blockout.md",
-    "Current Work/Final Ui Drafting.md",
-    "Overview/Immediate tasks.md",
     "Overview/Overview.md",
+    "Completed Work/Generator Prototype.md",
+    "Overview/Immediate tasks.md",
+    "Completed Work/Power Consumer prototype.md",
+    "Completed Work/Prototype Ui Work - done.md",
+    "Current Work/3d scene blockout.md",
+    "original front.jpg",
+    "original back.jpg",
     "Pasted image 20240421212613.png",
+    "Pasted image 20240610155635.png",
+    "Current Work/Final Ui Drafting.md",
     "Completed Work",
     "Overview",
     "Current Work",
