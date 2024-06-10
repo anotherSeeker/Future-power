@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using Unity.Mathematics;
 
-public class GameBoard : MonoBehaviour 
+public class GameBoard : MonoBehaviour  
 {
     [SerializeField] private GeneratorController genController;
     [SerializeField] private ConsumerController conController;
@@ -11,7 +11,6 @@ public class GameBoard : MonoBehaviour
     private float reqPower = 0f;
 
     [SerializeField] bool overloaded = false;
-    //We "overload" when our power*overloadRatio + overloardBuffer
     [SerializeField] float overloadBuffer = 50f;
     [SerializeField] float overloadRatio = 0.1f;
 
