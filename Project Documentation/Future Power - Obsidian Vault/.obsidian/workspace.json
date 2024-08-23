@@ -11,23 +11,9 @@
             "id": "ad3d7bc0884ab25c",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "Completed Work/Generator Prototype.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "e6ac86c765afa589",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Completed Work/System Architecture.md",
-                "mode": "source",
-                "source": false
+                "file": "Pasted image 20240610155635.png"
               }
             }
           },
@@ -42,8 +28,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "c90bd8550ab84856",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Overview/Immediate tasks.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -109,7 +108,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Completed Work/Generator Prototype.md",
+                "file": "Overview/Immediate tasks.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -126,7 +125,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Completed Work/Generator Prototype.md",
+                "file": "Overview/Immediate tasks.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -149,7 +148,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Completed Work/Generator Prototype.md"
+                "file": "Overview/Immediate tasks.md"
               }
             }
           }
@@ -170,20 +169,20 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "ad3d7bc0884ab25c",
+  "active": "c90bd8550ab84856",
   "lastOpenFiles": [
-    "Completed Work/System Architecture.md",
     "Overview/Overview.md",
-    "Completed Work/Generator Prototype.md",
-    "Overview/Immediate tasks.md",
-    "Completed Work/Power Consumer prototype.md",
-    "Completed Work/Prototype Ui Work - done.md",
-    "Current Work/3d scene blockout.md",
-    "original front.jpg",
     "original back.jpg",
-    "Pasted image 20240421212613.png",
+    "original front.jpg",
+    "Completed Work/System Architecture.md",
+    "Completed Work/Prototype Ui Work - done.md",
+    "Completed Work/Power Consumer prototype.md",
+    "Completed Work/Generator Prototype.md",
     "Pasted image 20240610155635.png",
+    "Pasted image 20240421212613.png",
     "Current Work/Final Ui Drafting.md",
+    "Current Work/3d scene blockout.md",
+    "Overview/Immediate tasks.md",
     "Completed Work",
     "Overview",
     "Current Work",
