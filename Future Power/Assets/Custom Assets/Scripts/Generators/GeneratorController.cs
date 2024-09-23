@@ -9,11 +9,6 @@ public class GeneratorController : MonoBehaviour
     void Start()
     {
         children = GetChildren(transform);
-
-        foreach(Transform child in children)
-        {
-            Debug.Log("Genny: "+child.name);
-        }
     }
 
     public float GetGeneratorPower()

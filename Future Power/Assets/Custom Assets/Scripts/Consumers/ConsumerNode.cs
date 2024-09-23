@@ -7,13 +7,13 @@ public class ConsumerNode : MonoBehaviour
 
     private bool toggleState = false;
 
-    public TextMeshProUGUI genName;
-    public TextMeshProUGUI genDescription;
+    //public TextMeshProUGUI genName;
+    //public TextMeshProUGUI genDescription;
 
     void Start()
     {
-        genName.text = consumer.ConsumerName;
-        genDescription.text = consumer.powerDraw+"MW"; 
+        //genName.text = consumer.ConsumerName;
+        //genDescription.text = consumer.powerDraw+"MW"; 
     }
 
     public float getRequestedPower()
@@ -28,6 +28,6 @@ public class ConsumerNode : MonoBehaviour
     public void setState(bool state)
     {
         toggleState = state;
-        genDescription.text = consumer.powerDraw+"MW"; 
+        //genDescription.text = consumer.powerDraw+"MW"; 
     }
 }

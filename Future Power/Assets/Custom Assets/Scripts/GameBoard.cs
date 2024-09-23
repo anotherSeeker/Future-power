@@ -4,7 +4,7 @@ using Unity.Mathematics;
 
 public class GameBoard : MonoBehaviour  
 {
-    [SerializeField] private GeneratorController genController;
+    [SerializeField] private GeneratorController3d genController;
     [SerializeField] private ConsumerController conController;
 
     private float genPower = 0f;
