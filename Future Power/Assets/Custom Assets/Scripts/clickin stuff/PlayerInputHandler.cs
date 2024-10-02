@@ -8,23 +8,20 @@ public class PlayerInputHandler : MonoBehaviour
     [SerializeField] private InputActionAsset playerControls;
 
     [Header("Action Map Name References")] 
-    [SerializeField] private String actionMapName = "Player";
+    [SerializeField] private string actionMapName = "Player";
 
     [Header("Action Name References")] 
-    [SerializeField] private String move = "Move";
-    [SerializeField] private String look = "Look";
-    [SerializeField] private String flyUp = "Up";
-    [SerializeField] private String flyDown = "Down";
+    [SerializeField] private string click = "Click";
+    [SerializeField] private string move = "Move";
+    [SerializeField] private string look = "Look";
 
+    private InputAction clickAction;
     private InputAction moveAction;
     private InputAction lookAction;
-    private InputAction flyUpAction;
-    private InputAction flyDownAction;
     
-    public Vector2 MoveInput {get; private set;}
-    public Vector2 InputLook {get; private set;}
-    public bool inputFlyUp {get; private set;}
-    public bool inputFlyDown {get; private set;}
+    public Vector2 moveInput {get; private set;}
+    public Vector2 lookInput {get; private set;}
+    public bool clickInput {get; private set;}
 
     public static PlayerInputHandler Instance {get; private set;}
 
@@ -40,6 +37,34 @@ public class PlayerInputHandler : MonoBehaviour
             Destroy(gameObject);
         }
 
+        clickAction = playerControls.FindActionMap(actionMapName).FindAction(click);
         moveAction = playerControls.FindActionMap(actionMapName).FindAction(move);
+        lookAction = playerControls.FindActionMap(actionMapName).FindAction(look);
+    }
+
+    void RegisterInputActions()
+    {
+        moveAction.performed += context => moveInput = context.ReadValue<Vector2>();
+        moveAction.canceled += context => moveInput = Vector2.zero;
+
+        lookAction.performed += context => lookInput = context.ReadValue<Vector2>();
+        lookAction.canceled += context => lookInput = Vector2.zero;
+
+        clickAction.performed += context => clickInput = true;
+        clickAction.canceled += context => clickInput = false;
+    }
+
+    private void OnEnable()
+    {   
+        clickAction.Enable(); 
+        moveAction.Enable();
+        lookAction.Enable();
+    }
+
+     private void OnDisable()
+    {   
+        clickAction.Disable(); 
+        moveAction.Disable();
+        lookAction.Disable();
     }
 }
