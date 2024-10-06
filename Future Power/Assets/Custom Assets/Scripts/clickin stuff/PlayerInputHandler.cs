@@ -12,10 +12,12 @@ public class PlayerInputHandler : MonoBehaviour
 
     [Header("Action Name References")] 
     [SerializeField] private string click = "Click";
+    [SerializeField] private string position = "Position";
     [SerializeField] private string move = "Move";
     [SerializeField] private string look = "Look";
 
     private InputAction clickAction;
+    private InputAction positionAction;
     private InputAction moveAction;
     private InputAction lookAction;
     
@@ -37,21 +39,22 @@ public class PlayerInputHandler : MonoBehaviour
             Destroy(gameObject);
         }
 
-        clickAction = playerControls.FindActionMap(actionMapName).FindAction(click);
-        moveAction = playerControls.FindActionMap(actionMapName).FindAction(move);
-        lookAction = playerControls.FindActionMap(actionMapName).FindAction(look);
+        clickAction =   playerControls.FindActionMap(actionMapName).FindAction(click);
+        positionAction= playerControls.FindActionMap(actionMapName).FindAction(position);
+        moveAction =    playerControls.FindActionMap(actionMapName).FindAction(move);
+        lookAction =    playerControls.FindActionMap(actionMapName).FindAction(look);
     }
 
     void RegisterInputActions()
     {
-        moveAction.performed += context => moveInput = context.ReadValue<Vector2>();
-        moveAction.canceled += context => moveInput = Vector2.zero;
+        moveAction.performed += context =>  moveInput = context.ReadValue<Vector2>();
+        moveAction.canceled += context =>   moveInput = Vector2.zero;
 
-        lookAction.performed += context => lookInput = context.ReadValue<Vector2>();
-        lookAction.canceled += context => lookInput = Vector2.zero;
+        lookAction.performed += context =>  lookInput = context.ReadValue<Vector2>();
+        lookAction.canceled += context =>   lookInput = Vector2.zero;
 
         clickAction.performed += context => clickInput = true;
-        clickAction.canceled += context => clickInput = false;
+        clickAction.canceled += context =>  clickInput = false;
     }
 
     private void OnEnable()

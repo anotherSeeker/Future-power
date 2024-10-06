@@ -46,7 +46,7 @@ public class GeneratorNode3d : MonoBehaviour
         genDescription.text = "Target Power: "+desiredGeneration.ToString("F2")+"\nCurrent Power: "+currentGeneration.ToString("F2");
     }
 
-    void clickedOn()
+    void onClick()
     {
         print("GenNode: "+genName+"was clicked on");
     }
