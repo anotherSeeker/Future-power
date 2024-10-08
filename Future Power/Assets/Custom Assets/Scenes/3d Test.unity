@@ -1593,9 +1593,10 @@ GameObject:
   - component: {fileID: 1749534017}
   - component: {fileID: 1749534016}
   - component: {fileID: 1749534015}
+  - component: {fileID: 1749534020}
   - component: {fileID: 1749534018}
   - component: {fileID: 1749534019}
-  - component: {fileID: 1749534020}
+  - component: {fileID: 1749534021}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1733,8 +1734,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1af5cf70db674a946afd8d21dc3dc1da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  flySpeed: 5
   sensitivity: 5
+  upDownRange: 80
 --- !u!114 &1749534020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1751,6 +1753,24 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
+--- !u!114 &1749534021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1749534014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aeeabbe3190cc64a908d3cb00de434a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerControls: {fileID: -944628639613478452, guid: d50ea793e22607740822c8bbfb31de87, type: 3}
+  actionMapName: Player
+  click: Click
+  position: Position
+  move: Move
+  look: Look
 --- !u!1001 &1900771155
 PrefabInstance:
   m_ObjectHideFlags: 0

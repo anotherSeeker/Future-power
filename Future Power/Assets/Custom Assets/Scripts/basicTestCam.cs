@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class basicTestCam : MonoBehaviour 
@@ -11,34 +8,57 @@ public class basicTestCam : MonoBehaviour
     [SerializeField] private float flySpeed = 5.0f;
 
     [Header("Look Sens")]
-    [SerializeField] private float sensitivity = 2.0f;
+    [SerializeField] private float sensitivity = 0.2f;
     [SerializeField] private float upDownRange = 80.0f;
 
     private Vector3 currentMovementVector = new Vector3(0,0,0);
     private float vertRotation;
+
+    private GameObject interactTarget;
 
     private Camera mainCamera;
     private PlayerInputHandler inputHandler;
 
     private void Awake()
     {
-        mainCamera = Camera.main;
+        //mainCamera = Camera.main;
         inputHandler = PlayerInputHandler.Instance;
     }
 
     void Update()
     {
         HandleMovement();
+        PlayerInputHandler.clickValues clickState = ClickState();
+        if (clickState != PlayerInputHandler.clickValues.None)
+        {
+            Debug.Log("AAAAA");
+            FireScreenRay();
+        }
+
         HandleRotation();
+    }
+
+    private PlayerInputHandler.clickValues ClickState()
+    {
+        PlayerInputHandler.clickValues value = inputHandler.clickInput;
+        return value;
     }
 
     void FireScreenRay()
     {
-        Ray cameraRay = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        LayerMask mask = LayerMask.GetMask();
 
-        if (Physics.Raycast(cameraRay, out RaycastHit hitInfo))
+        Ray cameraRay = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        bool hitSomething = Physics.Raycast(cameraRay, out RaycastHit hitInfo, 10);
+
+        if (hitSomething)
         {
-           Debug.Log(hitInfo.collider.gameObject.name);
+            Debug.DrawRay(cameraRay.origin, cameraRay.direction*10, Color.green, 2, false);
+            Debug.Log(hitInfo.collider.gameObject.name);
+        }
+        else
+        {
+             Debug.DrawRay(cameraRay.origin, cameraRay.direction*10, Color.red, 2, false);
         }
     }
 
@@ -49,25 +69,22 @@ public class basicTestCam : MonoBehaviour
         Vector3 worldDirection = transform.TransformDirection(inputDirection);
         worldDirection.Normalize();
 
-        currentMovementVector.x = worldDirection.x * flySpeed;
-        currentMovementVector.z = worldDirection.z * flySpeed;
+        currentMovementVector.x = worldDirection.x * flySpeed * Time.deltaTime;
+        currentMovementVector.z = worldDirection.z * flySpeed * Time.deltaTime;
 
         transform.position += currentMovementVector;
     }
 
     private void HandleRotation()
     {
-        float horizRotation = inputHandler.lookInput.x * sensitivity;
+        //we don't actually want this behaviour
+        /*float horizRotation = inputHandler.lookInput.x * sensitivity;
         transform.Rotate(0,horizRotation,0);
 
         vertRotation -= inputHandler.lookInput.y * sensitivity;
         vertRotation = Mathf.Clamp(vertRotation, -upDownRange, upDownRange);
         Quaternion.Euler(vertRotation, 0, 0);
 
-        transform.Rotate(0,0,0);
+        transform.Rotate(0,0,0);*/
     }
-}
-
-        //transform.position += transform.forward * Input.GetAxis("Vertical") * speed * Time.deltaTime;
-        //transform.position += transform.right * Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-        //transform.position += Vector3.up * Input.GetAxis("Jump") * speed * Time.deltaTime;       
+}   
