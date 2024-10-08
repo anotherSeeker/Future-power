@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 5514719479584947674}
   - component: {fileID: 1804440011519825640}
   - component: {fileID: 2982432815795378145}
+  - component: {fileID: 6004001005949313193}
   m_Layer: 3
   m_Name: CoalGen
   m_TagString: Untagged
@@ -142,6 +143,27 @@ MonoBehaviour:
   currentGeneration: 0
   genName: {fileID: 8006300838214168927}
   genDescription: {fileID: 5806548384107935093}
+--- !u!65 &6004001005949313193
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1886045820086748787}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.12082133, y: 0.1348635, z: 0.12326836}
+  m_Center: {x: 0.060410626, y: -0.00008557737, z: -0.000085461885}
 --- !u!1 &2938569580345762338
 GameObject:
   m_ObjectHideFlags: 0

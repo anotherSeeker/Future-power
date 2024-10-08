@@ -18,8 +18,8 @@ public class GeneratorNode3d : MonoBehaviour
     //num between 0 and 1 determining our current power output
     [SerializeField] private float currentGeneration = 0f; 
 
-    public TextMeshProUGUI genName;
-    public TextMeshProUGUI genDescription;
+    private string genName;
+    private string genDescription;
 
     void Start()
     {
@@ -28,8 +28,8 @@ public class GeneratorNode3d : MonoBehaviour
             maxPower = generator.genCapacity;
             responseSpeed = generator.responseSpeed;
 
-            genName.text = generator.GenName;
-            genDescription.text = "Target Power: "+desiredGeneration.ToString("F2")+"\nCurrent Power: "+currentGeneration.ToString("F2"); 
+            genName = generator.GenName;
+            genDescription = "Target Power: "+desiredGeneration.ToString("F2")+"\nCurrent Power: "+currentGeneration.ToString("F2"); 
         }
     }
     
@@ -43,12 +43,12 @@ public class GeneratorNode3d : MonoBehaviour
     {
         desiredGeneration = maxPower * targetGeneration;
         currentGeneration = Mathf.MoveTowards(currentGeneration, desiredGeneration, responseSpeed * Time.deltaTime);
-        genDescription.text = "Target Power: "+desiredGeneration.ToString("F2")+"\nCurrent Power: "+currentGeneration.ToString("F2");
+        genDescription = "Target Power: "+desiredGeneration.ToString("F2")+"\nCurrent Power: "+currentGeneration.ToString("F2");
     }
 
-    void onClick()
+    public void onClick()
     {
-        print("GenNode: "+genName+"was clicked on");
+        Debug.Log("GenNode: "+genName+"was clicked on");
     }
 
     //Called when we change the target power slider on the ui

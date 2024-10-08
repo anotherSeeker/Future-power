@@ -5,29 +5,32 @@ public class ConsumerNode : MonoBehaviour
 {
     [SerializeField] private PowerCons consumer; 
 
-    private bool toggleState = false;
-
-    //public TextMeshProUGUI genName;
-    //public TextMeshProUGUI genDescription;
+    private bool consumerIsActive = false;
 
     void Start()
-    {
-        //genName.text = consumer.ConsumerName;
-        //genDescription.text = consumer.powerDraw+"MW"; 
-    }
+    {    }
 
     public float getRequestedPower()
     {
-        if (toggleState)
+        if (consumerIsActive)
             return consumer.powerDraw;
 
         return 0f;
     }
 
-    //Called when the toggle button is pressed
     public void setState(bool state)
     {
-        toggleState = state;
-        //genDescription.text = consumer.powerDraw+"MW"; 
+        consumerIsActive = state;
+    }
+
+    public void toggleState()
+    {
+        consumerIsActive = !consumerIsActive;
+    }
+
+    public void onClick()
+    {
+        Debug.Log("ConsNode: "+name+"was clicked on");
+        toggleState();
     }
 }

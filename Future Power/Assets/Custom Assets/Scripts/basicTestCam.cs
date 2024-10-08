@@ -1,67 +1,40 @@
 using System;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class basicTestCam : MonoBehaviour 
 {
-    [Header("Speed")]
     [SerializeField] private float flySpeed = 5.0f;
-
-    [Header("Look Sens")]
     [SerializeField] private float sensitivity = 0.2f;
     [SerializeField] private float upDownRange = 80.0f;
+    [SerializeField] private float clickHeldDelay = 1.0f;
+    [SerializeField] private String clickableLayerName = "Clickable";
+
+
 
     private Vector3 currentMovementVector = new Vector3(0,0,0);
-    private float vertRotation;
-
     private GameObject interactTarget;
-
     private Camera mainCamera;
     private PlayerInputHandler inputHandler;
 
+    public enum clickValues
+    {
+        None,
+        Started,
+        Held
+    }
+
     private void Awake()
     {
-        //mainCamera = Camera.main;
         inputHandler = PlayerInputHandler.Instance;
+        SetupClickActions();
     }
 
     void Update()
     {
         HandleMovement();
-        PlayerInputHandler.clickValues clickState = ClickState();
-        if (clickState != PlayerInputHandler.clickValues.None)
-        {
-            Debug.Log("AAAAA");
-            FireScreenRay();
-        }
-
-        HandleRotation();
     }
-
-    private PlayerInputHandler.clickValues ClickState()
-    {
-        PlayerInputHandler.clickValues value = inputHandler.clickInput;
-        return value;
-    }
-
-    void FireScreenRay()
-    {
-        LayerMask mask = LayerMask.GetMask();
-
-        Ray cameraRay = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        bool hitSomething = Physics.Raycast(cameraRay, out RaycastHit hitInfo, 10);
-
-        if (hitSomething)
-        {
-            Debug.DrawRay(cameraRay.origin, cameraRay.direction*10, Color.green, 2, false);
-            Debug.Log(hitInfo.collider.gameObject.name);
-        }
-        else
-        {
-             Debug.DrawRay(cameraRay.origin, cameraRay.direction*10, Color.red, 2, false);
-        }
-    }
-
     private void HandleMovement()
     {
         Vector3 inputDirection = new Vector3(inputHandler.moveInput.x, 0f, inputHandler.moveInput.y);
@@ -75,16 +48,56 @@ public class basicTestCam : MonoBehaviour
         transform.position += currentMovementVector;
     }
 
-    private void HandleRotation()
+    bool RaycastFindClickable()
     {
-        //we don't actually want this behaviour
-        /*float horizRotation = inputHandler.lookInput.x * sensitivity;
-        transform.Rotate(0,horizRotation,0);
+        int raycastLength = 5;
+        LayerMask mask = LayerMask.GetMask(clickableLayerName);
 
-        vertRotation -= inputHandler.lookInput.y * sensitivity;
-        vertRotation = Mathf.Clamp(vertRotation, -upDownRange, upDownRange);
-        Quaternion.Euler(vertRotation, 0, 0);
+        Ray cameraRay = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        bool hitSomething = Physics.Raycast(cameraRay, out RaycastHit hitInfo, raycastLength, mask);
 
-        transform.Rotate(0,0,0);*/
+        if (hitSomething)
+        {
+            interactTarget = hitInfo.transform.gameObject;
+
+            Debug.DrawRay(cameraRay.origin, cameraRay.direction*raycastLength, Color.green, 2, false);
+            //Debug.Log(hitInfo.collider.gameObject.name);
+        }
+        else
+        {
+            //Debug.Log(hitInfo.distance);
+            Debug.DrawRay(cameraRay.origin, cameraRay.direction*raycastLength, Color.red, 2, false);
+        }
+
+        return hitSomething;
+    }
+
+
+    void SetupClickActions()
+    {        
+        inputHandler.clickAction.started    += OnClick;
+        inputHandler.clickAction.performed  += OnClickHeld;
+        inputHandler.clickAction.canceled   += context => interactTarget = null;
+    }
+
+    void OnClick(InputAction.CallbackContext context)
+    {
+        if (RaycastFindClickable())
+        {
+            if (interactTarget.GetComponent<GeneratorNode3d>())
+            {
+                interactTarget.GetComponent<GeneratorNode3d>().onClick();
+            }
+            if (interactTarget.GetComponent<ConsumerNode>())
+            {
+                interactTarget.GetComponent<ConsumerNode>().onClick();
+            }
+        }
+    }
+
+    void OnClickHeld(InputAction.CallbackContext context)
+    {
+        if (context.duration > clickHeldDelay) 
+            Debug.Log("Held");
     }
 }   

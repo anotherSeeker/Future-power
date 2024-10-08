@@ -248,9 +248,10 @@ GameObject:
   - component: {fileID: 7604038982759685533}
   - component: {fileID: 4586021501870249967}
   - component: {fileID: 7042076033904167998}
-  m_Layer: 0
+  - component: {fileID: 2841322636233151672}
+  m_Layer: 3
   m_Name: SolarGen
-  m_TagString: Clickable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -342,6 +343,27 @@ MonoBehaviour:
   currentGeneration: 0
   genName: {fileID: 890508154324103386}
   genDescription: {fileID: 2782520841403288377}
+--- !u!65 &2841322636233151672
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2430002542828980901}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.12082133, y: 0.1348635, z: 0.12326836}
+  m_Center: {x: 0.060410626, y: -0.00008557737, z: -0.000085461885}
 --- !u!1 &2440489455569790343
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,7 +382,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6460124498419688923
 RectTransform:
   m_ObjectHideFlags: 0
@@ -591,7 +613,7 @@ RectTransform:
   m_Father: {fileID: 1070782576535228797}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -800,7 +822,7 @@ RectTransform:
   m_Father: {fileID: 8354215371392112148}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

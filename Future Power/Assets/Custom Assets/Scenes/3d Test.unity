@@ -1737,6 +1737,8 @@ MonoBehaviour:
   flySpeed: 5
   sensitivity: 5
   upDownRange: 80
+  clickHeldDelay: 1
+  clickableLayerName: Clickable
 --- !u!114 &1749534020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1768,9 +1770,35 @@ MonoBehaviour:
   playerControls: {fileID: -944628639613478452, guid: d50ea793e22607740822c8bbfb31de87, type: 3}
   actionMapName: Player
   click: Click
-  position: Position
   move: Move
   look: Look
+  clickAction:
+    m_Name: Click
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 7bdce1c6-a4ed-4434-9023-7efeeb680135
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  moveAction:
+    m_Name: Move
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 2ee51a03-8478-4320-a5f1-99f3c4c2c4aa
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  lookAction:
+    m_Name: Look
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 8bf1f352-5302-4867-9f6a-43068f8efc54
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1001 &1900771155
 PrefabInstance:
   m_ObjectHideFlags: 0

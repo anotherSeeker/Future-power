@@ -5,16 +5,18 @@ using Unity.Mathematics;
 public class GameBoard : MonoBehaviour  
 {
     [SerializeField] private GeneratorController3d genController;
-    [SerializeField] private ConsumerController conController;
-
-    private float genPower = 0f;
-    private float reqPower = 0f;
-
-    [SerializeField] bool overloaded = false;
+    [SerializeField] private ConsumerController3d conController;
+    
     [SerializeField] float overloadBuffer = 50f;
     [SerializeField] float overloadRatio = 0.1f;
-
     public TextMeshProUGUI description;
+
+    [Header("Power Generation")]
+    [SerializeField] private float genPower = 0f;
+    [SerializeField] private float reqPower = 0f;
+    [SerializeField] bool overloaded = false;
+
+    
 
     void Start()
     {
