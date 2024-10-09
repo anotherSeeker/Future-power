@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GeneratorNode : MonoBehaviour
 {
-    [SerializeField] private powerGen generator;
+    [SerializeField] private PowerGen generator;
     [SerializeField] private bool noGenerator;
     private float maxPower;
     private float responseSpeed;

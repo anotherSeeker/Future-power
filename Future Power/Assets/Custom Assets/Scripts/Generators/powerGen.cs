@@ -2,7 +2,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "GeneratorData", menuName = "Generator Data", order = 0)]
  
-public class powerGen : ScriptableObject
+public class PowerGen : ScriptableObject
 {
     [SerializeField] public string GenName = "Default Generator";
     //450MW default for coal gen

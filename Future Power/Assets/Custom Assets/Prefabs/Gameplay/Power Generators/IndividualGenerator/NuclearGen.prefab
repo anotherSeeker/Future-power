@@ -704,11 +704,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   generator: {fileID: 11400000, guid: 2a03d14d0ba4d634a84884157ef5f3d7, type: 2}
   noGenerator: 0
-  genSprite: {fileID: 11400000, guid: f53e127d74268c0449ed57b3d8c1132b, type: 2}
+  genSprite: {fileID: 21300000, guid: 754b4fb847e1627489f3649c8e23b695, type: 3}
   targetGeneration: 0
   currentGeneration: 0
-  genName: {fileID: 6339069376570584125}
-  genDescription: {fileID: 8133325637535620252}
 --- !u!65 &1599643924528308683
 BoxCollider:
   m_ObjectHideFlags: 0

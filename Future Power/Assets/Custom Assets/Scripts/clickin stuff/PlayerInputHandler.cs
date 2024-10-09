@@ -20,14 +20,6 @@ public class PlayerInputHandler : MonoBehaviour
     public InputAction moveAction;
     public InputAction lookAction;
 
-
-    public enum clickValues
-    {
-        None,
-        Started,
-        Held
-    }
-
     public Vector2 moveInput {get; private set;}
     public Vector2 lookInput {get; private set;}
 
@@ -80,13 +72,5 @@ public class PlayerInputHandler : MonoBehaviour
 
         lookAction.performed    += context => lookInput = context.ReadValue<Vector2>();
         lookAction.canceled     += context => lookInput = Vector2.zero;
-    }
-
-    public interface IPlayerActions
-    {
-        void OnClickStarted(InputAction.CallbackContext context);
-        void OnClickEnded(InputAction.CallbackContext context);
-        void OnMove(InputAction.CallbackContext context);
-        void OnLook(InputAction.CallbackContext context);
     }
 }

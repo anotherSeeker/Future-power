@@ -5,12 +5,13 @@ using TMPro;
 public class GenNodeController3d : MonoBehaviour
 {
     [SerializeField] public List<GameObject> generators;
+    private GeneratorDial GenDial;
     [SerializeField] public TMP_Dropdown dropdown;
 
-    void Start()
+    void Awake()
     {
+        setupGenDial();
         populateDropdown();
-
         //sets the dropdown to the default value, index 0 in the list
         defaultDropdown();
     }
@@ -20,14 +21,18 @@ public class GenNodeController3d : MonoBehaviour
     {
         foreach(GameObject gen in generators)
         {
-            dropdown.options.Add(new TMP_Dropdown.OptionData(gen.GetComponent<GeneratorNode3d>().GetName(), null));
+            dropdown.options.Add(new TMP_Dropdown.OptionData(gen.GetComponent<GeneratorNode3d>().GetName(), gen.GetComponent<GeneratorNode3d>().GetSprite()));
         }
     }
     
     private void defaultDropdown()
     {
+        //dropdown.GetComponentInParent<Canvas>().worldCamera = Camera.main;  
+        
         dropdown.value = 0;
         ChangeNode();
+        
+        dropdown.Show();
     }
 
     public void ChangeNode()
@@ -35,10 +40,19 @@ public class GenNodeController3d : MonoBehaviour
         //Called OnValueChanged()
         int newChild = dropdown.value;
 
+        //zero out the dial
+        GenDial.ResetDial();
+
         Transform childGenerator = GetCurrentGen(transform);
         Destroy(childGenerator.gameObject);
 
         Instantiate(generators[newChild], transform);
+
+        GameObject canvas = dropdown.transform.parent.gameObject;
+        canvas.SetActive(false);
+        
+
+        Debug.Log(canvas.name+"false");
     }
 
     private Transform GetCurrentGen(Transform parent)
@@ -55,9 +69,17 @@ public class GenNodeController3d : MonoBehaviour
         return null;
     }
 
+    public float GetCurrentPower()
+    {
+        return GetMaxPower()*GetTargetGeneration();
+    }
 
+    public float GetTargetGeneration()
+    {
+        return GenDial.GetTargetGeneration();
+    }
 
-    public float getCurrentPower()
+    public float GetMaxPower()
     {
         List<Transform> children = GetChildren(transform);
         float power = 0;
@@ -65,7 +87,7 @@ public class GenNodeController3d : MonoBehaviour
         foreach (Transform child in children)
         {   
             if (child.GetComponent<GeneratorNode3d>())             
-                power = power + child.GetComponent<GeneratorNode3d>().getCurrentPower();
+                power = power + child.GetComponent<GeneratorNode3d>().getMaxPower();
         }
 
         return power;
@@ -81,5 +103,14 @@ public class GenNodeController3d : MonoBehaviour
         }
 
         return children;
+    }
+
+    private void setupGenDial()
+    {
+        foreach(Transform child in transform)
+        {
+            if (child.GetComponent<GeneratorDial>())
+                GenDial = child.GetComponent<GeneratorDial>();
+        }
     }
 }

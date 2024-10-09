@@ -16,8 +16,6 @@ public class GameBoard : MonoBehaviour
     [SerializeField] private float reqPower = 0f;
     [SerializeField] bool overloaded = false;
 
-    
-
     void Start()
     {
         description.text = "Requested Power: "+reqPower.ToString("F2")+"\nGenerated Power: "+genPower.ToString("F2");

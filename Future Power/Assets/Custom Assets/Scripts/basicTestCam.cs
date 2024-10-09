@@ -1,32 +1,33 @@
 using System;
-using UnityEditor.Rendering.LookDev;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class basicTestCam : MonoBehaviour 
 {
     [SerializeField] private float flySpeed = 5.0f;
-    [SerializeField] private float sensitivity = 0.2f;
-    [SerializeField] private float upDownRange = 80.0f;
-    [SerializeField] private float clickHeldDelay = 1.0f;
+    //[SerializeField] private float sensitivity = 0.2f;
+    //[SerializeField] private float upDownRange = 80.0f;
+    [SerializeField] private float clickHoldDelay = 0.5f;
     [SerializeField] private String clickableLayerName = "Clickable";
 
 
+    private Boolean clickHeld = false;
+    private float clickHeldStartTime = 0;
+    private Vector2 initialClickLocation;
 
     private Vector3 currentMovementVector = new Vector3(0,0,0);
     private GameObject interactTarget;
     private Camera mainCamera;
     private PlayerInputHandler inputHandler;
+    private static TMP_Dropdown activeDropdown = null;
 
-    public enum clickValues
-    {
-        None,
-        Started,
-        Held
-    }
 
-    private void Awake()
+
+    private void Start()
     {
+        mainCamera = Camera.main;
         inputHandler = PlayerInputHandler.Instance;
         SetupClickActions();
     }
@@ -34,6 +35,7 @@ public class basicTestCam : MonoBehaviour
     void Update()
     {
         HandleMovement();
+        updateHoldClick();
     }
     private void HandleMovement()
     {
@@ -72,32 +74,80 @@ public class basicTestCam : MonoBehaviour
         return hitSomething;
     }
 
-
     void SetupClickActions()
     {        
         inputHandler.clickAction.started    += OnClick;
-        inputHandler.clickAction.performed  += OnClickHeld;
-        inputHandler.clickAction.canceled   += context => interactTarget = null;
+        //inputHandler.clickAction.performed  += OnClick;
+        inputHandler.clickAction.canceled   += OnCancelClick;
     }
 
     void OnClick(InputAction.CallbackContext context)
     {
+        clickHeld = true;
+        clickHeldStartTime = Time.time;
+        initialClickLocation = new Vector2(Mouse.current.position.ReadValue().x,Mouse.current.position.ReadValue().y );
+        Debug.Log("started");
+
         if (RaycastFindClickable())
         {
-            if (interactTarget.GetComponent<GeneratorNode3d>())
+            //if (activeDropdown == null)
             {
-                interactTarget.GetComponent<GeneratorNode3d>().onClick();
-            }
-            if (interactTarget.GetComponent<ConsumerNode>())
-            {
-                interactTarget.GetComponent<ConsumerNode>().onClick();
+                if (interactTarget.GetComponent<GeneratorNode3d>())
+                {
+                    activeDropdown = interactTarget.GetComponent<GeneratorNode3d>().onClick(activeDropdown);
+                }
+                if (interactTarget.GetComponent<ConsumerNode>())
+                {
+                    interactTarget.GetComponent<ConsumerNode>().onClick();
+                }
+                return;
             }
         }
+
+        /*if (activeDropdown != null)
+        {
+            //clicking while a canvas is up will hide the canvas
+            GameObject canvas = activeDropdown.transform.parent.gameObject;
+            canvas.SetActive(false);
+
+            activeDropdown = null;
+        }*/
     }
 
-    void OnClickHeld(InputAction.CallbackContext context)
+    void OnCancelClick(InputAction.CallbackContext context)
     {
-        if (context.duration > clickHeldDelay) 
-            Debug.Log("Held");
+        clickHeld = false;
+        interactTarget = null;
+        Debug.Log("canceled");
+    }
+
+    void updateHoldClick()
+    {
+        if (clickHeld)
+        {
+           
+            float clickDuration = Time.time-clickHeldStartTime; 
+            if (clickDuration > clickHoldDelay)
+            {
+                if (interactTarget)
+                {
+                    if (interactTarget.GetComponent<GeneratorDial>())
+                    {
+                        
+                        Vector2 currentLocation = new Vector2(Mouse.current.position.ReadValue().x,Mouse.current.position.ReadValue().y);
+                        
+                        float distance = Mathf.Abs(currentLocation.x-initialClickLocation.x) + Mathf.Abs(currentLocation.y-initialClickLocation.y);
+                        distance = Mathf.Clamp(distance, 0, 500);
+
+                        if (currentLocation.x-initialClickLocation.x < 0)
+                            distance *=-1;
+
+                        bool isSlowSpin = false;
+
+                        interactTarget.GetComponent<GeneratorDial>().SpinDial(isSlowSpin, distance);
+                    }
+                }
+            }
+        }
     }
 }   

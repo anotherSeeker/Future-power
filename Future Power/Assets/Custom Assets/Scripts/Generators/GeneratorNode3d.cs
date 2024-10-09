@@ -1,13 +1,14 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GeneratorNode3d : MonoBehaviour
 {
-    [SerializeField] private powerGen generator;
+    [SerializeField] private PowerGen generator;
     [SerializeField] private bool noGenerator;
     private float maxPower;
     private float responseSpeed;
-    [SerializeField] private TMP_SpriteAsset genSprite;
+    [SerializeField] private Sprite genSprite;
 
     //num between 0 and 1 determining our desired power output
     [SerializeField] private float targetGeneration = 0f;
@@ -18,7 +19,6 @@ public class GeneratorNode3d : MonoBehaviour
     //num between 0 and 1 determining our current power output
     [SerializeField] private float currentGeneration = 0f; 
 
-    private string genName;
     private string genDescription;
 
     void Start()
@@ -28,7 +28,6 @@ public class GeneratorNode3d : MonoBehaviour
             maxPower = generator.genCapacity;
             responseSpeed = generator.responseSpeed;
 
-            genName = generator.GenName;
             genDescription = "Target Power: "+desiredGeneration.ToString("F2")+"\nCurrent Power: "+currentGeneration.ToString("F2"); 
         }
     }
@@ -43,12 +42,32 @@ public class GeneratorNode3d : MonoBehaviour
     {
         desiredGeneration = maxPower * targetGeneration;
         currentGeneration = Mathf.MoveTowards(currentGeneration, desiredGeneration, responseSpeed * Time.deltaTime);
-        genDescription = "Target Power: "+desiredGeneration.ToString("F2")+"\nCurrent Power: "+currentGeneration.ToString("F2");
     }
 
-    public void onClick()
+    public TMP_Dropdown onClick(TMP_Dropdown activeDropdown)
     {
-        Debug.Log("GenNode: "+genName+"was clicked on");
+        if (GetComponentInParent<GenNodeController3d>())
+        {
+            try
+            {
+                TMP_Dropdown dropdown = transform.parent.GetComponent<GenNodeController3d>().dropdown;
+                GameObject canvas = transform.parent.GetComponent<GenNodeController3d>().dropdown.transform.parent.gameObject;
+
+                activeDropdown = dropdown;
+
+                canvas.gameObject.SetActive(true);
+                dropdown.Show();
+
+                return activeDropdown;
+            }
+            catch (System.Exception ex)
+            {
+                 Debug.Log(ex);
+                 if (activeDropdown)
+                    return activeDropdown;
+            }
+        }
+        return null;
     }
 
     //Called when we change the target power slider on the ui
@@ -62,8 +81,21 @@ public class GeneratorNode3d : MonoBehaviour
         return currentGeneration;
     }
 
+    public float getMaxPower()
+    {
+        return maxPower;
+    }
+
     public string GetName()
     {
         return generator.GenName;
+    }
+    public string GetDescription()
+    {
+        return "Generating: "+desiredGeneration.ToString("F2")+" \\ "+currentGeneration.ToString("F2");
+    }
+    public Sprite GetSprite()
+    {
+        return genSprite;
     }
 }

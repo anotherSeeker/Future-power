@@ -18,7 +18,7 @@ public class GeneratorController3d : MonoBehaviour
         foreach (Transform child in children)
         {   
             if (child.GetComponent<GenNodeController3d>())             
-                power = power + child.GetComponent<GenNodeController3d>().getCurrentPower();
+                power = power + child.GetComponent<GenNodeController3d>().GetCurrentPower();
         }
 
         return power;
@@ -30,7 +30,8 @@ public class GeneratorController3d : MonoBehaviour
 
         foreach(Transform child in parent)
         {
-            children.Add(child);
+            if (child.GetComponent<GenNodeController3d>())
+                children.Add(child);
         }
 
         return children;
@@ -38,7 +39,6 @@ public class GeneratorController3d : MonoBehaviour
 
     private void UpdateGenerators(GameObject newGenerator, GameObject targetNode)
     {
-
         //update the list of children now that we've changed that list
         children = GetChildren(transform);
     }
