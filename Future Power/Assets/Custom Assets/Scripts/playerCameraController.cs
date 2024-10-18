@@ -7,10 +7,12 @@ using UnityEngine.UI;
 public class basicTestCam : MonoBehaviour 
 {
     [SerializeField] private float flySpeed = 5.0f;
+    [SerializeField] private bool useDebugFly = false;
     //[SerializeField] private float sensitivity = 0.2f;
     //[SerializeField] private float upDownRange = 80.0f;
     [SerializeField] private float clickHoldDelay = 0.5f;
     [SerializeField] private String clickableLayerName = "Clickable";
+    [SerializeField] private GameObject cameraFlyPoints;
 
 
     private Boolean clickHeld = false;
@@ -39,18 +41,25 @@ public class basicTestCam : MonoBehaviour
     }
     private void HandleMovement()
     {
-        Vector3 inputDirection = new Vector3(inputHandler.moveInput.x, 0f, inputHandler.moveInput.y);
+        if (useDebugFly)
+        {
+            Vector3 inputDirection = new Vector3(inputHandler.moveInput.x, 0f, inputHandler.moveInput.y);
 
-        Vector3 worldDirection = transform.TransformDirection(inputDirection);
-        worldDirection.Normalize();
+            Vector3 worldDirection = transform.TransformDirection(inputDirection);
+            worldDirection.Normalize();
 
-        currentMovementVector.x = worldDirection.x * flySpeed * Time.deltaTime;
-        currentMovementVector.z = worldDirection.z * flySpeed * Time.deltaTime;
+            currentMovementVector.x = worldDirection.x * flySpeed * Time.deltaTime;
+            currentMovementVector.z = worldDirection.z * flySpeed * Time.deltaTime;
 
-        transform.position += currentMovementVector;
+            transform.position += currentMovementVector;
+        }
+        else
+        {
+            updatePositionLerp();
+        }
     }
 
-    bool RaycastFindClickable()
+    private bool RaycastFindClickable()
     {
         int raycastLength = 5;
         LayerMask mask = LayerMask.GetMask(clickableLayerName);
@@ -74,14 +83,13 @@ public class basicTestCam : MonoBehaviour
         return hitSomething;
     }
 
-    void SetupClickActions()
+    private void SetupClickActions()
     {        
         inputHandler.clickAction.started    += OnClick;
-        //inputHandler.clickAction.performed  += OnClick;
         inputHandler.clickAction.canceled   += OnCancelClick;
     }
 
-    void OnClick(InputAction.CallbackContext context)
+    private void OnClick(InputAction.CallbackContext context)
     {
         clickHeld = true;
         clickHeldStartTime = Time.time;
@@ -114,14 +122,14 @@ public class basicTestCam : MonoBehaviour
         }*/
     }
 
-    void OnCancelClick(InputAction.CallbackContext context)
+    private void OnCancelClick(InputAction.CallbackContext context)
     {
         clickHeld = false;
         interactTarget = null;
         Debug.Log("canceled");
     }
 
-    void updateHoldClick()
+    private void updateHoldClick()
     {
         if (clickHeld)
         {
@@ -149,5 +157,10 @@ public class basicTestCam : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void updatePositionLerp()
+    {
+
     }
 }   

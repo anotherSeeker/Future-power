@@ -374,6 +374,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dom1 Group
       objectReference: {fileID: 0}
+    - target: {fileID: 5489454257482238030, guid: 5342c171f1cea37438ad4b99894364e7, type: 3}
+      propertyPath: ringMaterialRed
+      value: 
+      objectReference: {fileID: 2100000, guid: ce31f822f4e9c0e4593e4c2ce4bcd218, type: 2}
     - target: {fileID: 8239977744089080740, guid: 5342c171f1cea37438ad4b99894364e7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.375
