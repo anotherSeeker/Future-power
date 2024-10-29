@@ -9,7 +9,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: switchState
+    m_ConditionEvent: changeState
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -741985533190599093}
@@ -65,7 +65,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: switchState
+    m_ConditionEvent: changeState
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2297021229326263304}
@@ -171,7 +171,7 @@ AnimatorController:
   m_Name: LeverAnimController
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: switchState
+  - m_Name: changeState
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0

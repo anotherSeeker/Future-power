@@ -32,6 +32,15 @@ public class ConsumerController3d : MonoBehaviour
         return power;
     }
 
+    public void resetAll()
+    {
+        foreach (Transform child in children)
+        {
+            if (child.GetComponent<ConsumerNode>())
+                child.GetComponent<ConsumerNode>().resetNode();
+        }
+    }
+
     private List<Transform> GetChildren(Transform parent)
     {
         List<Transform> children = new List<Transform>();

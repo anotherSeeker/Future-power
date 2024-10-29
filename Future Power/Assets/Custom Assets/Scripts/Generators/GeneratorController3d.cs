@@ -37,10 +37,19 @@ public class GeneratorController3d : MonoBehaviour
         return children;
     }
 
-    private void UpdateGenerators(GameObject newGenerator, GameObject targetNode)
+    private void UpdateGenerators()
     {
         //update the list of children now that we've changed that list
         children = GetChildren(transform);
+    }
+
+    public void resetAll()
+    {
+        foreach (Transform child in children)
+        {
+            if (child.GetComponent<GenNodeController3d>())
+                child.GetComponent<GenNodeController3d>().reset();
+        }
     }
 
 }

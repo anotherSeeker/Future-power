@@ -54,7 +54,10 @@ public class ConsumerNode : MonoBehaviour
     {
         if (animController)
         {
-            Debug.Log("spipp");
+            if (animController.GetCurrentAnimatorStateInfo(0).IsName("BaseState.Turn On") || animController.GetCurrentAnimatorStateInfo(0).IsName("BaseState.Turn Off"))
+            {
+                //return;//if we're currently changing states can't click again
+            }
             animController.SetTrigger(triggerName);
         }
         setState(!onState);
@@ -66,4 +69,11 @@ public class ConsumerNode : MonoBehaviour
         Debug.Log("ConsNode: "+name+"was clicked on");
         toggleState();
     } 
+
+    public void resetNode()
+    {
+        animController.SetTrigger("reset");
+        setState(!onState);
+        SetColour();
+    }
 }

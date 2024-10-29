@@ -7,6 +7,7 @@ public class GenNodeController3d : MonoBehaviour
     [SerializeField] public List<GameObject> generators;
     private GeneratorDial GenDial;
     [SerializeField] public TMP_Dropdown dropdown;
+    [SerializeField] private GameObject currentGenerator;
 
     void Awake()
     {
@@ -46,7 +47,7 @@ public class GenNodeController3d : MonoBehaviour
         Transform childGenerator = GetCurrentGen(transform);
         Destroy(childGenerator.gameObject);
 
-        Instantiate(generators[newChild], transform);
+        currentGenerator = Instantiate(generators[newChild], transform);
 
         GameObject canvas = dropdown.transform.parent.gameObject;
         canvas.SetActive(false);
@@ -61,7 +62,6 @@ public class GenNodeController3d : MonoBehaviour
 
         foreach(Transform child in parent)
         {
-            children.Add(child);
             if (child.GetComponent<GeneratorNode3d>())
                 return child;
         }
@@ -86,8 +86,11 @@ public class GenNodeController3d : MonoBehaviour
 
         foreach (Transform child in children)
         {   
-            if (child.GetComponent<GeneratorNode3d>())             
+            if (child.GetComponent<GeneratorNode3d>())
+            {
+                currentGenerator = child.gameObject;             
                 power = power + child.GetComponent<GeneratorNode3d>().getMaxPower();
+            }
         }
 
         return power;
@@ -112,5 +115,11 @@ public class GenNodeController3d : MonoBehaviour
             if (child.GetComponent<GeneratorDial>())
                 GenDial = child.GetComponent<GeneratorDial>();
         }
+    }
+
+    public void reset()
+    {
+        GenDial.ResetDial();
+        
     }
 }

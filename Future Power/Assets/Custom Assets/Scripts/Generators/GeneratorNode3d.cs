@@ -98,4 +98,9 @@ public class GeneratorNode3d : MonoBehaviour
     {
         return genSprite;
     }
+    public void reset()
+    {
+        desiredGeneration = 0;
+        currentGeneration = 0;
+    }
 }

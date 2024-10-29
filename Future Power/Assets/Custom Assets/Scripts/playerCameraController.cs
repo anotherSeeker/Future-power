@@ -12,7 +12,8 @@ public class basicTestCam : MonoBehaviour
     //[SerializeField] private float upDownRange = 80.0f;
     [SerializeField] private float clickHoldDelay = 0.5f;
     [SerializeField] private String clickableLayerName = "Clickable";
-    [SerializeField] private GameObject cameraFlyPoints;
+    [SerializeField] private GameObject gameCameraFlyPoints;
+    [SerializeField] private GameObject menuCameraFlyPoints;
 
 
     private Boolean clickHeld = false;
@@ -107,6 +108,10 @@ public class basicTestCam : MonoBehaviour
                 if (interactTarget.GetComponent<ConsumerNode>())
                 {
                     interactTarget.GetComponent<ConsumerNode>().onClick();
+                }
+                if (interactTarget.GetComponent<resetButton>())
+                {
+                    interactTarget.GetComponent<resetButton>().onClick();
                 }
                 return;
             }
