@@ -39,6 +39,32 @@ public class GeneratorDial : MonoBehaviour
         }
     }
 
+    /*public void SpinDialOld(bool isSlowSpin, float distance)
+    {
+        //let's say that from 0 - 1 is four rotations. to remap that we'll want 4*360 degrees
+        float maximumSpin = numRotationsForFullPower * 360;
+       
+        if (distance != 0)
+        {
+            float max = 500f;
+            float min = -max;
+            
+            float newMax = baseRotationSpeed;
+            float newMin = -newMax;
+
+            float stepDistance = (distance-min) / (max-min) * (newMax-newMin) + newMin;
+            float newTarget = currTargetGeneration+stepDistance;
+
+            currTargetGeneration += (newTarget-currTargetGeneration)*Time.deltaTime;
+            currTargetGeneration = Mathf.Clamp(currTargetGeneration, 0,1);
+
+            float desiredRotation;
+            desiredRotation = maximumSpin*currTargetGeneration;
+
+            transform.rotation = Quaternion.Euler(desiredRotation,0,0);
+        }
+    }*/
+
     public float GetTargetGeneration()
     {
         return currTargetGeneration;

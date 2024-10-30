@@ -197,7 +197,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.000611089, y: 0.00074024056, z: 0.00069870125}
+  m_Size: {x: 0.000611089, y: 0.00044498246, z: 0.00044204347}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-1362147276823182521
 MonoBehaviour:
@@ -216,7 +216,7 @@ MonoBehaviour:
   ringMaterialOn: {fileID: 2100000, guid: d45c3bc4429501b44bafa4b8b288d844, type: 2}
   ringMaterialOff: {fileID: 2100000, guid: ce31f822f4e9c0e4593e4c2ce4bcd218, type: 2}
   ringMaterialRequired: {fileID: 2100000, guid: c35f67d60bc932247bb77f3cd0b2a0bf, type: 2}
-  triggerName: switchState
+  triggerName: changeState
 --- !u!95 &3118203118398647175
 Animator:
   serializedVersion: 5

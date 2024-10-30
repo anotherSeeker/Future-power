@@ -48,7 +48,7 @@ public class GeneratorController3d : MonoBehaviour
         foreach (Transform child in children)
         {
             if (child.GetComponent<GenNodeController3d>())
-                child.GetComponent<GenNodeController3d>().reset();
+                child.GetComponent<GenNodeController3d>().resetNode();
         }
     }
 

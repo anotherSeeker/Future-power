@@ -1,19 +1,28 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class basicTestCam : MonoBehaviour 
 {
     [SerializeField] private float flySpeed = 5.0f;
+    private  Boolean flyingAlongPath = false;
+
+    private int targetFlyPoint = 0;
+
     [SerializeField] private bool useDebugFly = false;
     //[SerializeField] private float sensitivity = 0.2f;
     //[SerializeField] private float upDownRange = 80.0f;
     [SerializeField] private float clickHoldDelay = 0.5f;
     [SerializeField] private String clickableLayerName = "Clickable";
+    [SerializeField] private String blockingLayerName = "UI";
     [SerializeField] private GameObject gameCameraFlyPoints;
     [SerializeField] private GameObject menuCameraFlyPoints;
+
+    [SerializeField] private Button inGameFlyButton;
 
 
     private Boolean clickHeld = false;
@@ -25,8 +34,6 @@ public class basicTestCam : MonoBehaviour
     private Camera mainCamera;
     private PlayerInputHandler inputHandler;
     private static TMP_Dropdown activeDropdown = null;
-
-
 
     private void Start()
     {
@@ -63,6 +70,7 @@ public class basicTestCam : MonoBehaviour
     private bool RaycastFindClickable()
     {
         int raycastLength = 5;
+
         LayerMask mask = LayerMask.GetMask(clickableLayerName);
 
         Ray cameraRay = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
@@ -73,7 +81,7 @@ public class basicTestCam : MonoBehaviour
             interactTarget = hitInfo.transform.gameObject;
 
             Debug.DrawRay(cameraRay.origin, cameraRay.direction*raycastLength, Color.green, 2, false);
-            //Debug.Log(hitInfo.collider.gameObject.name);
+            Debug.Log(hitInfo.collider.gameObject.name);
         }
         else
         {
@@ -96,10 +104,14 @@ public class basicTestCam : MonoBehaviour
         clickHeldStartTime = Time.time;
         initialClickLocation = new Vector2(Mouse.current.position.ReadValue().x,Mouse.current.position.ReadValue().y );
         Debug.Log("started");
-
+        //tests if we're hovering the ui and if
+        if (IsPointerBlocked())
+        {
+            Debug.Log("Pointer is blocked");
+            return;
+        }
         if (RaycastFindClickable())
         {
-            //if (activeDropdown == null)
             {
                 if (interactTarget.GetComponent<GeneratorNode3d>())
                 {
@@ -116,15 +128,6 @@ public class basicTestCam : MonoBehaviour
                 return;
             }
         }
-
-        /*if (activeDropdown != null)
-        {
-            //clicking while a canvas is up will hide the canvas
-            GameObject canvas = activeDropdown.transform.parent.gameObject;
-            canvas.SetActive(false);
-
-            activeDropdown = null;
-        }*/
     }
 
     private void OnCancelClick(InputAction.CallbackContext context)
@@ -166,6 +169,41 @@ public class basicTestCam : MonoBehaviour
 
     public void updatePositionLerp()
     {
+        for (int i=0; i<gameCameraFlyPoints.transform.childCount; i++)
+        {
 
+
+
+        }
+    }
+
+
+
+
+    public bool IsPointerBlocked()
+    {
+        return IsPointerBlocked(GetEventSystemRaycastResults());
+    }
+
+
+    //Returns 'true' if we touched or hovering on Unity UI element.
+    private bool IsPointerBlocked(List<RaycastResult> eventSystemRaysastResults)
+    {
+        for (int index = 0; index < eventSystemRaysastResults.Count; index++)
+        {
+            RaycastResult curRaysastResult = eventSystemRaysastResults[index];
+            if (curRaysastResult.gameObject.layer == LayerMask.NameToLayer(blockingLayerName))
+                return true;
+        }
+        return false;
+    }
+
+     static List<RaycastResult> GetEventSystemRaycastResults()
+    {
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = Mouse.current.position.ReadValue();
+        List<RaycastResult> raysastResults = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, raysastResults);
+        return raysastResults;
     }
 }   

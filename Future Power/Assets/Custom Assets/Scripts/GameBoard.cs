@@ -9,7 +9,8 @@ public class GameBoard : MonoBehaviour
     
     [SerializeField] float overloadBuffer = 50f;
     [SerializeField] float overloadRatio = 0.1f;
-    public TextMeshProUGUI description;
+    [SerializeField] private TextMeshProUGUI descriptionFront;
+    [SerializeField] private TextMeshProUGUI descriptionBack;
 
     [Header("Power Generation")]
     [SerializeField] private float genPower = 0f;
@@ -18,7 +19,8 @@ public class GameBoard : MonoBehaviour
 
     void Start()
     {
-        description.text = "Requested Power: "+reqPower.ToString("F2")+"\nGenerated Power: "+genPower.ToString("F2");
+        descriptionFront.text = "Requested Power: "+reqPower.ToString("F2")+"\nGenerated Power: "+genPower.ToString("F2");
+        descriptionBack.text = "Requested Power: "+reqPower.ToString("F2")+"\nGenerated Power: "+genPower.ToString("F2");
     }
 
     void Update()
@@ -26,11 +28,15 @@ public class GameBoard : MonoBehaviour
         genPower = genController.GetGeneratorPower();
         reqPower = conController.GetRequestedPower();
 
-        description.text = "Requested Power: "+reqPower.ToString("F2")+"\nGenerated Power: "+genPower.ToString("F2");
+        descriptionFront.text = "Requested Power: "+reqPower.ToString("F2")+"\nGenerated Power: "+genPower.ToString("F2");
+        descriptionBack.text = "Requested Power: "+reqPower.ToString("F2")+"\nGenerated Power: "+genPower.ToString("F2");
 
         overloaded = checkOverloaded();
         if (overloaded)
-            description.text = "System Overloaded\nManual Reset Required";
+        {
+            descriptionFront.text = "Grid Overload Reset Required\nReq.: "+reqPower.ToString("F2")+" Gen.: "+genPower.ToString("F2");
+            descriptionBack.text = "Grid Overload Reset Required\nReq.: "+reqPower.ToString("F2")+" Gen.: "+genPower.ToString("F2");
+        }
     }
 
     private bool checkOverloaded()

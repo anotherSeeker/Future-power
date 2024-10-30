@@ -28,21 +28,22 @@ public class GeneratorNode3d : MonoBehaviour
             maxPower = generator.genCapacity;
             responseSpeed = generator.responseSpeed;
 
-            genDescription = "Target Power: "+desiredGeneration.ToString("F2")+"\nCurrent Power: "+currentGeneration.ToString("F2"); 
+            //genDescription = "Target Power: "+desiredGeneration.ToString("F2")+"\nCurrent Power: "+currentGeneration.ToString("F2"); 
         }
     }
     
-    void Update()
-    {
-        if (!noGenerator)
-            updatePower();
-    }
+    // void Update()
+    // {
+    //     //NodeController and Dial handle power now, node merely holds data
+    //     //if (!noGenerator)
+    //         //updatePower();
+    // }
 
-    void updatePower()
+    /*void updatePower()
     {
         desiredGeneration = maxPower * targetGeneration;
         currentGeneration = Mathf.MoveTowards(currentGeneration, desiredGeneration, responseSpeed * Time.deltaTime);
-    }
+    }*/
 
     public TMP_Dropdown onClick(TMP_Dropdown activeDropdown)
     {
@@ -94,11 +95,15 @@ public class GeneratorNode3d : MonoBehaviour
     {
         return "Generating: "+desiredGeneration.ToString("F2")+" \\ "+currentGeneration.ToString("F2");
     }
+    public float getResponseSpeed()
+    {
+        return responseSpeed;
+    }
     public Sprite GetSprite()
     {
         return genSprite;
     }
-    public void reset()
+    public void resetNode()
     {
         desiredGeneration = 0;
         currentGeneration = 0;

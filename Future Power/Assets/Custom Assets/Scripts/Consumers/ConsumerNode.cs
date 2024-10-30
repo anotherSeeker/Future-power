@@ -10,7 +10,7 @@ public class ConsumerNode : MonoBehaviour
     [SerializeField] private Material ringMaterialOn;
     [SerializeField] private Material ringMaterialOff;
     [SerializeField] private Material ringMaterialRequired;
-    [SerializeField] private String triggerName = "switchState";
+    [SerializeField] private String triggerName = "changeState";
     private Animator animController;
 
     private bool onState = false;
@@ -58,7 +58,7 @@ public class ConsumerNode : MonoBehaviour
             {
                 //return;//if we're currently changing states can't click again
             }
-            animController.SetTrigger(triggerName);
+            animController.SetTrigger("changeState");
         }
         setState(!onState);
         SetColour();
@@ -73,7 +73,7 @@ public class ConsumerNode : MonoBehaviour
     public void resetNode()
     {
         animController.SetTrigger("reset");
-        setState(!onState);
+        setState(false);
         SetColour();
     }
 }

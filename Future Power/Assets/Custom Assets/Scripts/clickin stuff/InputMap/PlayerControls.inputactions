@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "DialSpeed",
+                    "type": "Value",
+                    "id": "01fac6bd-550b-4934-8825-672e8bd8c23b",
+                    "expectedControlType": "Integer",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -139,6 +148,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Position",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9e2542c1-2c06-464d-97d8-bb04f7b6f3a5",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DialSpeed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2b8b91f4-7692-4373-bd9f-395123a24210",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DialSpeed",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
