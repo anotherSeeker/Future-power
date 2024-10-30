@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Custom Assets/Scenes/3d Test.unity
+    path: Assets/Custom Assets/Scenes/3d Room Scene.unity
     guid: 1bd866e5a60162e49a7765fcc58d0d67
   m_configObjects: {}

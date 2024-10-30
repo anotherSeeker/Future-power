@@ -6,12 +6,22 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class basicTestCam : MonoBehaviour 
+public class playerCameraController : MonoBehaviour 
 {
-    [SerializeField] private float flySpeed = 5.0f;
-    private  Boolean flyingAlongPath = false;
+    [SerializeField] private float flySpeed = 0.5f;
+    [SerializeField] private float rotSpeed = 45.0f;
+    [SerializeField] private float moveTime = 1;
 
-    private int targetFlyPoint = 0;
+
+    private Vector3 flyVelocity = new Vector3();
+    private float rotVelocityX = 0;
+    private float rotVelocityY = 0;
+    private float rotVelocityZ = 0;
+    
+    private bool isGameStartPath = true;
+    private  Boolean isTraversingPath = false;
+    private int finalTargetPoint = 0;
+    private int currentTargetPoint = 0;
 
     [SerializeField] private bool useDebugFly = false;
     //[SerializeField] private float sensitivity = 0.2f;
@@ -22,10 +32,16 @@ public class basicTestCam : MonoBehaviour
     [SerializeField] private GameObject gameCameraFlyPoints;
     [SerializeField] private GameObject menuCameraFlyPoints;
 
+    private bool isSlowDial = false;
+
+    private List<Transform> menuPoints = new List<Transform>();
+    private List<Transform> gamePoints = new List<Transform>();
+
+
     [SerializeField] private Button inGameFlyButton;
 
 
-    private Boolean clickHeld = false;
+    private bool clickHeld = false;
     private float clickHeldStartTime = 0;
     private Vector2 initialClickLocation;
 
@@ -40,6 +56,8 @@ public class basicTestCam : MonoBehaviour
         mainCamera = Camera.main;
         inputHandler = PlayerInputHandler.Instance;
         SetupClickActions();
+
+        defaultPosition();
     }
 
     void Update()
@@ -63,7 +81,7 @@ public class basicTestCam : MonoBehaviour
         }
         else
         {
-            updatePositionLerp();
+            updateCameraPos();
         }
     }
 
@@ -96,6 +114,9 @@ public class basicTestCam : MonoBehaviour
     {        
         inputHandler.clickAction.started    += OnClick;
         inputHandler.clickAction.canceled   += OnCancelClick;
+
+        inputHandler.dialSpeedAction.performed    += context => isSlowDial = true;
+        inputHandler.dialSpeedAction.canceled     += context => isSlowDial = false;
     }
 
     private void OnClick(InputAction.CallbackContext context)
@@ -113,6 +134,10 @@ public class basicTestCam : MonoBehaviour
         if (RaycastFindClickable())
         {
             {
+                if (interactTarget.GetComponent<GeneratorDial>())
+                {
+                    interactTarget.GetComponent<GeneratorDial>().selected();
+                }
                 if (interactTarget.GetComponent<GeneratorNode3d>())
                 {
                     activeDropdown = interactTarget.GetComponent<GeneratorNode3d>().onClick(activeDropdown);
@@ -129,9 +154,17 @@ public class basicTestCam : MonoBehaviour
             }
         }
     }
-
+    
     private void OnCancelClick(InputAction.CallbackContext context)
     {
+        if (interactTarget)
+        {
+            if (interactTarget.GetComponent<GeneratorDial>())
+            {
+                interactTarget.GetComponent<GeneratorDial>().deselected();
+            }
+        }
+
         clickHeld = false;
         interactTarget = null;
         Debug.Log("canceled");
@@ -158,24 +191,118 @@ public class basicTestCam : MonoBehaviour
                         if (currentLocation.x-initialClickLocation.x < 0)
                             distance *=-1;
 
-                        bool isSlowSpin = false;
-
-                        interactTarget.GetComponent<GeneratorDial>().SpinDial(isSlowSpin, distance);
+                        interactTarget.GetComponent<GeneratorDial>().SpinDial(isSlowDial, distance);
                     }
                 }
             }
         }
     }
 
-    public void updatePositionLerp()
+    public void updateTargetPoint()
     {
-        for (int i=0; i<gameCameraFlyPoints.transform.childCount; i++)
+        if (currentTargetPoint < finalTargetPoint)
+            currentTargetPoint++;
+        else if (currentTargetPoint > finalTargetPoint)
+            currentTargetPoint--;
+    }
+
+    public void startGamePointsMove()
+    {
+        isTraversingPath = true;
+
+        if (finalTargetPoint == 0)
         {
+            //arrays start at 0 count starts at 1
+            finalTargetPoint = gamePoints.Count-1;
+        }
+        else
+        {
+            finalTargetPoint = 0;
+        }
 
+    }
 
+    public void updateCameraPos()
+    {
+        if (isGameStartPath && isTraversingPath)
+        {
+            //if we're at the target point stop, if we've hit one point along the path, we can continue
+            if ((transform.position - menuPoints[currentTargetPoint].position).magnitude < 0.05)
+            {
+                //if we're on our final target point and our rotation is done, return, else we start moving towards the next point
+                if (currentTargetPoint == finalTargetPoint && (transform.rotation.eulerAngles - menuPoints[currentTargetPoint].rotation.eulerAngles).magnitude < 0.05)
+                {
+                    transform.position = menuPoints[currentTargetPoint].position;
+                    transform.rotation = menuPoints[currentTargetPoint].rotation;
 
+                    isTraversingPath = false;
+                    isGameStartPath = false;
+                    return;
+                }
+                else
+                    updateTargetPoint();
+            }
+
+            doMove(menuPoints);
+        }
+        else if (isTraversingPath)
+        {
+            //if we're at the target point stop, if we've hit one point along the path, we can continue
+            if ((transform.position - gamePoints[currentTargetPoint].position).magnitude < 0.05)
+            {
+                //if we're on our final target point and our rotation is done, return, else we start moving towards the next point
+                //if we're on our final target point and our rotation is done, return, else we start moving towards the next point
+                if (currentTargetPoint == finalTargetPoint && (transform.rotation.eulerAngles - gamePoints[currentTargetPoint].rotation.eulerAngles).magnitude < 0.05)
+                {
+                    transform.position = gamePoints[currentTargetPoint].position;
+                    transform.rotation = gamePoints[currentTargetPoint].rotation;
+
+                    isTraversingPath = false;
+                    return;
+                }
+                else
+                    updateTargetPoint();
+            }
+
+            doMove(gamePoints);
         }
     }
+
+    private void doMove(List<Transform> points)
+    {
+        float usedMoveTime = moveTime;
+        if (currentTargetPoint != finalTargetPoint)
+                usedMoveTime = moveTime/2;
+
+        //move from current position towards gamePoints[currentTargetPoint].position governed by flyspeed and deltatime so we're frame independent
+        transform.position = Vector3.SmoothDamp(transform.position, points[currentTargetPoint].position, ref flyVelocity, usedMoveTime, rotSpeed);
+        
+        //simple rotate to face target position
+        float x = Mathf.SmoothDampAngle(transform.eulerAngles.x, points[currentTargetPoint].eulerAngles.x, ref rotVelocityX, usedMoveTime, rotSpeed);
+        float y = Mathf.SmoothDampAngle(transform.eulerAngles.y, points[currentTargetPoint].eulerAngles.y, ref rotVelocityY, usedMoveTime, rotSpeed);
+        float z = Mathf.SmoothDampAngle(transform.eulerAngles.z, points[currentTargetPoint].eulerAngles.z, ref rotVelocityZ, usedMoveTime, rotSpeed);
+        
+        transform.rotation = Quaternion.Euler(x, y, z);
+    }
+
+    public void defaultPosition()
+    {
+        for (int i=0; i<menuCameraFlyPoints.transform.childCount; i++)
+        {
+            menuPoints.Add(menuCameraFlyPoints.transform.GetChild(i));
+        }
+        for (int i=0; i<menuCameraFlyPoints.transform.childCount; i++)
+        {
+            gamePoints.Add(gameCameraFlyPoints.transform.GetChild(i));
+        }
+
+        transform.position = menuPoints[0].position;
+        transform.rotation = menuPoints[0].rotation;
+    }
+
+
+
+
 
 
 

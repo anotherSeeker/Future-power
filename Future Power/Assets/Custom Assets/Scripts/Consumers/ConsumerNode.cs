@@ -6,17 +6,15 @@ using UnityEngine;
 public class ConsumerNode : MonoBehaviour
 {
     [SerializeField] private PowerCons consumer; 
+    [SerializeField] private bool required = false;
     [SerializeField] private MeshRenderer leverBaseMeshRenderer;
     [SerializeField] private Material ringMaterialOn;
     [SerializeField] private Material ringMaterialOff;
     [SerializeField] private Material ringMaterialRequired;
-    [SerializeField] private String triggerName = "changeState";
+    //[SerializeField] private String triggerName = "changeState";
     private Animator animController;
 
     private bool onState = false;
-
-    private Color redCol = new Color(255, 14, 27);
-    private Color greenCol = new Color(20, 255, 60);
 
     void Start()
     {  
@@ -38,23 +36,25 @@ public class ConsumerNode : MonoBehaviour
 
     private void SetColour()
     {
+        //swap ring colours
         List<Material> newMaterials = new List<Material>();
         leverBaseMeshRenderer.GetSharedMaterials(newMaterials);
 
         if (onState)
             newMaterials[1] = ringMaterialOn;
+        else if (required)
+            newMaterials[1] = ringMaterialRequired;
         else
             newMaterials[1] = ringMaterialOff;
 
         leverBaseMeshRenderer.SetMaterials(newMaterials);
-        //Debug.Log("Bibbidi");
     }
 
     public void toggleState()
     {
         if (animController)
         {
-            if (animController.GetCurrentAnimatorStateInfo(0).IsName("BaseState.Turn On") || animController.GetCurrentAnimatorStateInfo(0).IsName("BaseState.Turn Off"))
+            if (! (animController.GetCurrentAnimatorStateInfo(0).IsName("BaseState.Turn On") || animController.GetCurrentAnimatorStateInfo(0).IsName("BaseState.Turn Off")))
             {
                 //return;//if we're currently changing states can't click again
             }

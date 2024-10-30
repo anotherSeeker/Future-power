@@ -11,6 +11,14 @@ public class GeneratorDial : MonoBehaviour
     [SerializeField] private float baseRotationSpeed = 1f;
     [SerializeField] private float slowSpinMultiplier = 0.1f;
     [SerializeField] private int numRotationsForFullPower = 4;
+    [SerializeField] private Light selectedLight;
+    private Boolean isSelected = false;
+
+    void Update()
+    {
+        if (selectedLight)
+            selectedLight.enabled = isSelected;
+    }
 
     //max value of 1 min of 0; we'll increment by a value depending on if we're 
     public void SpinDial(bool isSlowSpin, float distance)
@@ -20,10 +28,14 @@ public class GeneratorDial : MonoBehaviour
        
         if (distance != 0)
         {
+            float speed = baseRotationSpeed;
+            if (isSlowSpin)
+                speed*=slowSpinMultiplier;
+
             float max = 500f;
             float min = -max;
             
-            float newMax = baseRotationSpeed;
+            float newMax = speed;
             float newMin = -newMax;
 
             float stepDistance = (distance-min) / (max-min) * (newMax-newMin) + newMin;
@@ -75,7 +87,17 @@ public class GeneratorDial : MonoBehaviour
         currTargetGeneration = 0f;
         transform.rotation = Quaternion.Euler(0,0,0);
     }
+    public void selected()
+    {
+        isSelected = true;
+    }
+    public void deselected()
+    {
+        isSelected = false;
+    }
 }
+
+
 
 
 //             float generationUpdate;
