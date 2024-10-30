@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd5c80fe3d5d4744a4ab4dd1f5cd3c3, type: 3}
+  m_Name: Set B Scenario 9
+  m_EditorClassIdentifier: 
+  GenName: Scenario 9
+  numDomestic1: 6
+  numDomestic2: 6
+  numLightInd: 5
+  numCommercial: 4
+  numHeavyInd: 0
+  numServices: 5
+  banSolar: 0
+  banHydro: 0
+  banWind: 0
+  banNuclear: 0
+  banCoal: 0
+  banGas: 0
+  requires2Renewables: 1

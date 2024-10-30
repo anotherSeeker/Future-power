@@ -21,4 +21,5 @@ public class Scenario : ScriptableObject
     [SerializeField] public bool banNuclear = false; 
     [SerializeField] public bool banCoal = false; 
     [SerializeField] public bool banGas = false; 
+    [SerializeField] public bool requires2Renewables = false; 
 }
