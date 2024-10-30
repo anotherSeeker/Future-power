@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Animations;
 using UnityEngine;
 
@@ -11,7 +12,8 @@ public class ConsumerNode : MonoBehaviour
     [SerializeField] private Material ringMaterialOn;
     [SerializeField] private Material ringMaterialOff;
     [SerializeField] private Material ringMaterialRequired;
-    //[SerializeField] private String triggerName = "changeState";
+    [SerializeField] private String toggleTrigger = "changeState";
+    [SerializeField] private String resetTrigger = "Reset";
     private Animator animController;
 
     private bool onState = false;
@@ -52,16 +54,17 @@ public class ConsumerNode : MonoBehaviour
 
     public void toggleState()
     {
-        if (animController)
+        if (!animController.IsInTransition(0))
         {
-            if (! (animController.GetCurrentAnimatorStateInfo(0).IsName("BaseState.Turn On") || animController.GetCurrentAnimatorStateInfo(0).IsName("BaseState.Turn Off")))
-            {
-                //return;//if we're currently changing states can't click again
-            }
-            animController.SetTrigger("changeState");
+            animController.SetTrigger(toggleTrigger);
+        
+            setState(!onState);
+            SetColour();
         }
-        setState(!onState);
-        SetColour();
+        else
+        {
+            Debug.Log("animController.IsInTransition(0) is true");
+        }
     }
 
     public void onClick()
@@ -72,8 +75,11 @@ public class ConsumerNode : MonoBehaviour
 
     public void resetNode()
     {
-        animController.SetTrigger("reset");
-        setState(false);
-        SetColour();
+        if (onState!=false)
+        {
+            animController.SetTrigger(resetTrigger);
+            setState(false);
+            SetColour();
+        }
     }
 }
