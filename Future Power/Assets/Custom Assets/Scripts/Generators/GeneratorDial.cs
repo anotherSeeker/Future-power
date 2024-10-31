@@ -17,7 +17,7 @@ public class GeneratorDial : MonoBehaviour
     void Update()
     {
         if (selectedLight)
-            selectedLight.enabled = isSelected;
+            selectedLight.gameObject.SetActive(isSelected);
     }
 
     //max value of 1 min of 0; we'll increment by a value depending on if we're 

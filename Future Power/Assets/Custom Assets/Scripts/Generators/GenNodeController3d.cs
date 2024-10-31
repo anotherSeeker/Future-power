@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 
 public class GenNodeController3d : MonoBehaviour
 {
@@ -16,9 +17,7 @@ public class GenNodeController3d : MonoBehaviour
     void Awake()
     {
         setupGenDial();
-        populateDropdown();
-        //sets the dropdown to the default value, index 0 in the list
-        defaultDropdown();
+        //populateDropdown();
     }
 
     void Update()
@@ -26,7 +25,35 @@ public class GenNodeController3d : MonoBehaviour
         updatePower();
     }
 
-    void updatePower()
+    public bool isRenewable()
+    {
+        //should realistically put a property on the generator type that we can reference instead
+        if (currentGenerator.GetComponent<GeneratorNode3d>().GetName() == "Solar")
+        {
+            return true;
+        }
+        else if (currentGenerator.GetComponent<GeneratorNode3d>().GetName() == "Wind")
+        {
+            return true;
+        }
+        else if (currentGenerator.GetComponent<GeneratorNode3d>().GetName() == "Hydro")
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public float GetCost()
+    {
+        GeneratorNode3d node = currentGenerator.GetComponent<GeneratorNode3d>();
+        if (node)
+            return node.getInitialCost() + currentGeneration * node.getPerWattCost();
+
+        return 0f;
+    }
+
+    private void updatePower()
     {
         desiredGeneration = GetMaxPower() * GetTargetGeneration();
         currentGeneration = Mathf.MoveTowards(currentGeneration, desiredGeneration, GetResponseSpeed() * Time.deltaTime);
@@ -35,16 +62,59 @@ public class GenNodeController3d : MonoBehaviour
 
     public void populateDropdown()
     {
+        dropdown.ClearOptions();
+
         foreach(GameObject gen in generators)
         {
             dropdown.options.Add(new TMP_Dropdown.OptionData(gen.GetComponent<GeneratorNode3d>().GetName(), gen.GetComponent<GeneratorNode3d>().GetSprite()));
         }
+
+        defaultDropdown();
+    }
+
+    public void populateDropdown(Scenario scenario)
+    {
+        foreach(GameObject gen in generators)
+        {
+            bool addToDropdown = true;
+
+            //an addittedly bad setup to do this check, if there were more time I would rewrite this to be much cleaner
+            if (scenario.banCoal && gen.GetComponent<GeneratorNode3d>().GetName() == "Coal")
+            {
+                addToDropdown = false;
+            }
+            else if (scenario.banGas && gen.GetComponent<GeneratorNode3d>().GetName() == "Gas")
+            {
+                addToDropdown = false;
+            }
+            else if (scenario.banNuclear && gen.GetComponent<GeneratorNode3d>().GetName() == "Nuclear")
+            {
+                addToDropdown = false;
+            }
+            else if (scenario.banSolar && gen.GetComponent<GeneratorNode3d>().GetName() == "Solar")
+            {
+                addToDropdown = false;
+            }
+            else if (scenario.banWind && gen.GetComponent<GeneratorNode3d>().GetName() == "Wind")
+            {
+                addToDropdown = false;
+            }
+            else if (scenario.banHydro && gen.GetComponent<GeneratorNode3d>().GetName() == "Hydro")
+            {
+                addToDropdown = false;
+            }
+
+
+
+            if (addToDropdown)            
+                dropdown.options.Add(new TMP_Dropdown.OptionData(gen.GetComponent<GeneratorNode3d>().GetName(), gen.GetComponent<GeneratorNode3d>().GetSprite()));
+        }
+
+        defaultDropdown();
     }
     
     private void defaultDropdown()
-    {
-        //dropdown.GetComponentInParent<Canvas>().worldCamera = Camera.main;  
-        
+    {        
         dropdown.value = 0;
         ChangeNode();
         

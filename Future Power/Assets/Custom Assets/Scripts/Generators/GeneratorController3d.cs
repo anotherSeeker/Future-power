@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 public class GeneratorController3d : MonoBehaviour
 {
@@ -9,6 +10,47 @@ public class GeneratorController3d : MonoBehaviour
     void Start()
     {
         children = GetChildren(transform);
+    }
+
+    public void setupScenario(Scenario scenario)
+    {
+        foreach (Transform child in children)
+        {
+            if (child.GetComponent<GenNodeController3d>())
+                child.GetComponent<GenNodeController3d>().populateDropdown(scenario);
+        }
+    }
+
+    public bool hasTwoRenewables()
+    {
+        int count = 0;
+        foreach (Transform child in children)
+        {
+            GenNodeController3d node = child.GetComponent<GenNodeController3d>();
+            if (node)
+            {
+                if (node.isRenewable())
+                    count++;
+                
+                if (count >= 2)
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
+    public float GetCost()
+    {
+        float cost = 0;
+
+        foreach (Transform child in children)
+        {
+            if (child.GetComponent<GenNodeController3d>())             
+                cost += child.GetComponent<GenNodeController3d>().GetCost();
+        }
+
+        return cost;
     }
 
     public float GetGeneratorPower()

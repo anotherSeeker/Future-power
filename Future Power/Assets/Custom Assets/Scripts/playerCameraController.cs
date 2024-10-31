@@ -13,6 +13,9 @@ public class playerCameraController : MonoBehaviour
     [SerializeField] private float moveTime = 1;
 
 
+    [SerializeField] private Canvas inGameUI;
+    [SerializeField] private Canvas startMenu;
+
     private Vector3 flyVelocity = new Vector3();
     private float rotVelocityX = 0;
     private float rotVelocityY = 0;
@@ -62,6 +65,15 @@ public class playerCameraController : MonoBehaviour
 
     void Update()
     {
+        if (isGameStartPath)
+        {
+            inGameUI.enabled = false;
+        }
+        else
+        {
+            inGameUI.enabled = true;       
+        }
+        
         HandleMovement();
         updateHoldClick();
     }
@@ -213,7 +225,10 @@ public class playerCameraController : MonoBehaviour
         if (finalTargetPoint == 0)
         {
             //arrays start at 0 count starts at 1
-            finalTargetPoint = gamePoints.Count-1;
+            if (isGameStartPath)
+                finalTargetPoint = menuPoints.Count-1;
+            else
+                finalTargetPoint = gamePoints.Count-1;
         }
         else
         {
@@ -224,6 +239,7 @@ public class playerCameraController : MonoBehaviour
 
     public void updateCameraPos()
     {
+        //if we are using the initial move to start the game or using a mid game move
         if (isGameStartPath && isTraversingPath)
         {
             //if we're at the target point stop, if we've hit one point along the path, we can continue
@@ -237,6 +253,12 @@ public class playerCameraController : MonoBehaviour
 
                     isTraversingPath = false;
                     isGameStartPath = false;
+
+                    //reset this so that from now on we use GameFlyPoints instead of menuPoints
+                    //also enable the in game ui
+                    currentTargetPoint = 0;
+                    finalTargetPoint = 0;
+                    inGameUI.gameObject.SetActive(true);
                     return;
                 }
                 else
@@ -271,7 +293,9 @@ public class playerCameraController : MonoBehaviour
     private void doMove(List<Transform> points)
     {
         float usedMoveTime = moveTime;
-        if (currentTargetPoint != finalTargetPoint)
+        if (isGameStartPath)
+                usedMoveTime = moveTime*1.5f;
+        else if (currentTargetPoint != finalTargetPoint)
                 usedMoveTime = moveTime/2;
 
         //move from current position towards gamePoints[currentTargetPoint].position governed by flyspeed and deltatime so we're frame independent
@@ -291,7 +315,7 @@ public class playerCameraController : MonoBehaviour
         {
             menuPoints.Add(menuCameraFlyPoints.transform.GetChild(i));
         }
-        for (int i=0; i<menuCameraFlyPoints.transform.childCount; i++)
+        for (int i=0; i<gameCameraFlyPoints.transform.childCount; i++)
         {
             gamePoints.Add(gameCameraFlyPoints.transform.GetChild(i));
         }

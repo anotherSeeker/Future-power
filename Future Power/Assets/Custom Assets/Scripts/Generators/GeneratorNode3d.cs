@@ -10,8 +10,8 @@ public class GeneratorNode3d : MonoBehaviour
     private float responseSpeed;
     [SerializeField] private Sprite genSprite;
 
-    //num between 0 and 1 determining our desired power output
-    [SerializeField] private float targetGeneration = 0f;
+    //num between 0 and 1 determining our desired power output NOW HANDLED BY THE NODE CONTROLLER
+    //[SerializeField] private float targetGeneration = 0f;
 
     //number respreseting the flat targeted value
     private float desiredGeneration = 0f;
@@ -19,7 +19,7 @@ public class GeneratorNode3d : MonoBehaviour
     //num between 0 and 1 determining our current power output
     [SerializeField] private float currentGeneration = 0f; 
 
-    private string genDescription;
+    //private string genDescription;
 
     void Start()
     {
@@ -72,14 +72,24 @@ public class GeneratorNode3d : MonoBehaviour
     }
 
     //Called when we change the target power slider on the ui
-    public void updateTargetPower(float newTarget)
+    /*public void updateTargetPower(float newTarget)
     {
         targetGeneration = newTarget;
-    }
+    }*/
 
-    public float getCurrentPower()
+    /*public float getCurrentPower()
     {
         return currentGeneration;
+    }*/
+
+    public float getInitialCost()
+    {
+        return generator.initialCost;
+    }
+
+    public float getPerWattCost()
+    {
+        return generator.perWattCost;
     }
 
     public float getMaxPower()

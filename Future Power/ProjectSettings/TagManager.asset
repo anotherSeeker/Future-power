@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Clickable
+  - Domestic 1
+  - Domestic 2
+  - Light Industry
+  - Heavy Industry
+  - Services
+  - Commercial
   layers:
   - Default
   - TransparentFX

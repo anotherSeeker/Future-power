@@ -15,3 +15,5 @@ MonoBehaviour:
   GenName: Solar
   genCapacity: 250
   responseSpeed: 70
+  initialCost: 300
+  perWattCost: 0.25

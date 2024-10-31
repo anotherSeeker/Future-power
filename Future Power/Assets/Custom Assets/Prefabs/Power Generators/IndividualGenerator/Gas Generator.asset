@@ -15,3 +15,5 @@ MonoBehaviour:
   GenName: Gas
   genCapacity: 250
   responseSpeed: 60
+  initialCost: 125
+  perWattCost: 1

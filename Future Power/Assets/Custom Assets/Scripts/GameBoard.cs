@@ -1,21 +1,32 @@
 using UnityEngine;
 using TMPro;
 using Unity.Mathematics;
+using UnityEngine.UI;
+using System.Collections.Generic;
+using System;
 
 public class GameBoard : MonoBehaviour  
 {
     [SerializeField] private GeneratorController3d genController;
     [SerializeField] private ConsumerController3d conController;
     
+    [SerializeField] private ScenarioSet scenarioSetA;
+    [SerializeField] private ScenarioSet scenarioSetB;
+
     [SerializeField] float overloadBuffer = 50f;
     [SerializeField] float overloadRatio = 0.1f;
     [SerializeField] private TextMeshProUGUI descriptionFront;
     [SerializeField] private TextMeshProUGUI descriptionBack;
+    [SerializeField] private Button winButton;
 
     [Header("Power Generation")]
     [SerializeField] private float genPower = 0f;
     [SerializeField] private float reqPower = 0f;
     [SerializeField] bool overloaded = false;
+    [SerializeField] bool requires2Renewables = false;
+
+    private ScenarioSet setInUse;
+    List<float> savedScores = new List<float>();
 
     void Start()
     {
@@ -37,7 +48,67 @@ public class GameBoard : MonoBehaviour
             descriptionFront.text = "Grid Overload Reset Required\nReq.: "+reqPower.ToString("F2")+" Gen.: "+genPower.ToString("F2");
             descriptionBack.text = "Grid Overload Reset Required\nReq.: "+reqPower.ToString("F2")+" Gen.: "+genPower.ToString("F2");
         }
+
+        calculateScore();
     }
+
+    public void winScenario()
+    {
+        //save our score to be displayed later
+        float score = calculateScore();
+        savedScores.Add(score);
+
+        //update to the next scenario, reset the game board and initalise the new scenario
+        if (setInUse.stepScenarioIndex()==-1) //increments which individual scenario we're using within the list
+        {
+            setCompleted();
+        }
+        else
+        {
+            Scenario newScenario = setInUse.GetCurrentScenario();
+            
+            conController.resetAll();
+            genController.resetAll();
+
+            genController.setupScenario(newScenario);
+            conController.setupScenario(newScenario);
+        }
+    }
+
+    private void setCompleted()
+    {
+        String scoreString = "";
+
+        for (int i = 0; i<savedScores.Count; i++)
+        {
+            float score = savedScores[i];
+
+            scoreString += "Scenario "+i+" Score: "+score.ToString();
+        }
+
+        //TODO: send this to a ui object to display our score list
+    }
+
+    public void playSetA()
+    {
+        setInUse = scenarioSetA;
+        Scenario newScenario = setInUse.GetCurrentScenario();
+
+        genController.setupScenario(newScenario);
+        conController.setupScenario(newScenario);
+    }
+
+    public void playSetB()
+    {
+        setInUse = scenarioSetB;
+        Scenario newScenario = setInUse.GetCurrentScenario();
+
+        genController.setupScenario(newScenario);
+        conController.setupScenario(newScenario);
+
+        requires2Renewables = newScenario.requires2Renewables;
+    }
+
 
     private bool checkOverloaded()
     {
@@ -56,5 +127,41 @@ public class GameBoard : MonoBehaviour
 
         //neither of our conditions are true so we are not overloaded
         return false;
+    }
+
+
+    private float calculateScore()
+    {
+        float score;
+        //current scoring algorithm is 
+            // for each generator cost = initialCost+perWattCost*powerGenerated
+            // add each cost together, do (1000 - (requestedPower-generatedPower)) / totalCost and you want to maximise this number
+        float totalCost = genController.GetCost();
+        score = (1000 - (reqPower-genPower)) / totalCost;
+
+        //if we have all the required consumers activated, we are not overloaded and we requesting less power than we are generating
+        if (conController.canWin && !overloaded && reqPower - genPower <= 0)
+        {
+            //if we require 2 renewables and don't have that we cannot win
+            if (requires2Renewables) 
+            {
+                if (!genController.hasTwoRenewables())
+                {
+                    descriptionFront.text = "System must use 2 Renewable Sources\nReq.: "+reqPower.ToString("F2")+" Gen.: "+genPower.ToString("F2");
+                    descriptionBack.text = "System must use 2 Renewable Sources\nReq.: "+reqPower.ToString("F2")+" Gen.: "+genPower.ToString("F2");
+                    winButton.gameObject.SetActive(false);
+                    return score;
+                }
+            }
+                //we are allowed to save this score and win the game
+                descriptionFront.text = "Score: "+score.ToString("F2")+"Req.: "+reqPower.ToString("F2")+"\nGen.: "+genPower.ToString("F2");
+                descriptionBack.text = "Score: "+score.ToString("F2")+"Req.: "+reqPower.ToString("F2")+"\nGen.: "+genPower.ToString("F2");
+
+                winButton.gameObject.SetActive(true);           
+        }
+        else
+            winButton.gameObject.SetActive(false);
+
+        return score;
     }
 }

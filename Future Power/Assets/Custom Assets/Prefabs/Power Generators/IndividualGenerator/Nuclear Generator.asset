@@ -15,3 +15,5 @@ MonoBehaviour:
   GenName: Nuclear
   genCapacity: 350
   responseSpeed: 65
+  initialCost: 400
+  perWattCost: 0.4

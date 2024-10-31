@@ -9,4 +9,7 @@ public class PowerGen : ScriptableObject
     [SerializeField] public float genCapacity = 450f; 
     //Yeah no idea this will probably need to be redone later
     [SerializeField] public float responseSpeed = 1f;
+
+    [SerializeField] public float initialCost = 100f;
+    [SerializeField] public float perWattCost = 0.1f;
 }

@@ -15,3 +15,5 @@ MonoBehaviour:
   GenName: Wind
   genCapacity: 200
   responseSpeed: 70
+  initialCost: 250
+  perWattCost: 0.25

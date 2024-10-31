@@ -7,7 +7,7 @@ using UnityEngine;
 public class ConsumerNode : MonoBehaviour
 {
     [SerializeField] private PowerCons consumer; 
-    [SerializeField] private bool required = false;
+    [SerializeField] public bool required = false;
     [SerializeField] private MeshRenderer leverBaseMeshRenderer;
     [SerializeField] private Material ringMaterialOn;
     [SerializeField] private Material ringMaterialOff;
@@ -23,12 +23,22 @@ public class ConsumerNode : MonoBehaviour
         animController = transform.GetComponent<Animator>();
     }
 
+    void Update()
+    {
+        SetColour();
+    }
+
     public float getRequestedPower()
     {
         if (onState)
             return consumer.powerDraw;
 
         return 0f;
+    }
+
+    public bool getState()
+    {
+        return onState;
     }
 
     public void setState(bool state)
@@ -78,8 +88,9 @@ public class ConsumerNode : MonoBehaviour
         if (onState!=false)
         {
             animController.SetTrigger(resetTrigger);
-            setState(false);
-            SetColour();
         }
+        //required = false;
+        setState(false);
+        SetColour();
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 public class ConsumerController3d : MonoBehaviour
 {
@@ -6,8 +7,8 @@ public class ConsumerController3d : MonoBehaviour
 
     [SerializeField] private List<Transform> consumerGroups;
     [SerializeField] private List<Transform> consumers;
-
     [SerializeField] private float power = 0f;
+    public bool canWin = false;
 
     private void Start() 
     {
@@ -19,6 +20,11 @@ public class ConsumerController3d : MonoBehaviour
         {
             consumers.AddRange(GetChildren(group));
         }
+    }
+
+    void Update()
+    {
+        canWin = allRequiredActive();
     }
 
     public float GetRequestedPower()
@@ -55,4 +61,76 @@ public class ConsumerController3d : MonoBehaviour
 
         return children;
     }
+
+    private bool allRequiredActive()
+    {
+        bool state = true;
+        foreach (Transform consumer in consumers)
+        {
+            ConsumerNode node = consumer.GetComponent<ConsumerNode>();
+            if (node && (!node.getState() && node.required))
+            {
+                //the node is required but not on we cannot win until all required nodes are active
+                state = false;
+                return state;
+            }
+        }
+        return state;
+    }
+
+    public void setupScenario(Scenario scenario)
+    {
+        //reset all "required" states
+        foreach (Transform consumer in consumers)
+        {
+            consumer.GetComponent<ConsumerNode>().required = false;
+        }
+
+        //set required required states
+        foreach (Transform group in consumerGroups)
+        {
+            switch (group.tag)
+            {
+                case  "Domestic 1":
+                    flagRequired(group, scenario.numDomestic1);
+                    break;
+                case  "Domestic 2":
+                    flagRequired(group, scenario.numDomestic2);
+                    break;
+                case  "Light Industry":
+                    flagRequired(group, scenario.numLightInd);
+                    break;
+                case  "Heavy Industry":
+                    flagRequired(group, scenario.numHeavyInd);
+                    break;
+                case  "Commercial":
+                    flagRequired(group, scenario.numCommercial);
+                    break;
+                case  "Services":
+                    flagRequired(group, scenario.numServices);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private void flagRequired(Transform group, int num)
+    {
+        int count = 0;
+        foreach (Transform child in group)
+        {
+            if (count == num)
+                return;
+
+            if (child.GetComponent<ConsumerNode>())
+            {
+                //makes the node a required node
+                child.GetComponent<ConsumerNode>().required = true;
+                count++;
+            }
+        }
+    }
+
+
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3176882534153410594}
   m_Layer: 0
   m_Name: Dom2 Group
-  m_TagString: Untagged
+  m_TagString: Domestic 2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

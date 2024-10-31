@@ -15,3 +15,5 @@ MonoBehaviour:
   GenName: Coal
   genCapacity: 450
   responseSpeed: 50
+  initialCost: 200
+  perWattCost: 1

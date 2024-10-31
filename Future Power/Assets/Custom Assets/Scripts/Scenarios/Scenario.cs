@@ -12,7 +12,7 @@ public class Scenario : ScriptableObject
     [SerializeField] public int numLightInd = 1;
     [SerializeField] public int numCommercial = 1;  
     [SerializeField] public int numHeavyInd = 1; 
-    [SerializeField] public int numServices = 1; 
+    [SerializeField] public int numServices = 1;  
  
 
     [SerializeField] public bool banSolar = false; 
