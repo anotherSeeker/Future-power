@@ -13,7 +13,7 @@
             "state": {
               "type": "image",
               "state": {
-                "file": "Pasted image 20240610155635.png"
+                "file": "_images/Pasted image 20240610155635.png"
               },
               "icon": "lucide-image",
               "title": "Pasted image 20240610155635"
@@ -107,12 +107,14 @@
             "id": "12d9f367294a7f32",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "original front.jpg"
+                "file": "Working Notes/Completed Work/Generator Prototype.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "original front"
+              "icon": "lucide-file",
+              "title": "Generator Prototype"
             }
           }
         ],
@@ -188,7 +190,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "original front.jpg",
+                "file": "Working Notes/Completed Work/Generator Prototype.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -198,7 +200,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for original front"
+              "title": "Backlinks for Generator Prototype"
             }
           },
           {
@@ -207,12 +209,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "original front.jpg",
+                "file": "Working Notes/Completed Work/Generator Prototype.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from original front"
+              "title": "Outgoing links from Generator Prototype"
             }
           },
           {
@@ -234,10 +236,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "original front.jpg"
+                "file": "Working Notes/Completed Work/Generator Prototype.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of original front"
+              "title": "Outline of Generator Prototype"
             }
           }
         ]
@@ -257,25 +259,25 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "12d9f367294a7f32",
+  "active": "10b2fbfbd8a141fb",
   "lastOpenFiles": [
-    "original back.jpg",
+    "Working Notes/Completed Work/Power Consumer prototype.md",
+    "Working Notes/Completed Work/Generator Prototype.md",
+    "Future Power Overview/Game Scene Structure.md",
     "Future Power Overview/Game Structure and Editable Properties.md",
     "Future Power Overview/Script Structure.md",
-    "Future Power Overview/Game Scene Structure.md",
+    "_images/original back.jpg",
+    "_images",
+    "_images/original front.jpg",
+    "_images/Pasted image 20240421212613.png",
+    "_images/Pasted image 20240610155635.png",
     "Future Power Overview/Suggestions for Future Improvements.md",
-    "Untitled",
-    "Working Notes/Completed Work/Generator Prototype.md",
     "Working Notes",
     "Future Power Overview",
     "Working Notes/Overview/Overview.md",
     "Working Notes/Overview/Immediate tasks.md",
-    "original front.jpg",
-    "Pasted image 20240610155635.png",
-    "Pasted image 20240421212613.png",
     "Working Notes/Completed Work/System Architecture.md",
     "Working Notes/Completed Work/Prototype Ui Work - done.md",
-    "Working Notes/Completed Work/Power Consumer prototype.md",
     "Working Notes/Current Work/Final Ui Drafting.md",
     "Working Notes/Current Work/3d scene blockout.md",
     "Working Notes/Completed Work",
