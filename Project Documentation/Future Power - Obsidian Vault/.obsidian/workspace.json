@@ -14,7 +14,9 @@
               "type": "image",
               "state": {
                 "file": "Pasted image 20240610155635.png"
-              }
+              },
+              "icon": "lucide-image",
+              "title": "Pasted image 20240610155635"
             }
           },
           {
@@ -23,10 +25,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Overview/Overview.md",
+                "file": "Working Notes/Overview/Overview.md",
                 "mode": "source",
                 "source": false
-              }
+              },
+              "icon": "lucide-file",
+              "title": "Overview"
             }
           },
           {
@@ -35,14 +39,84 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Overview/Immediate tasks.md",
+                "file": "Working Notes/Completed Work/Generator Prototype.md",
                 "mode": "source",
                 "source": false
-              }
+              },
+              "icon": "lucide-file",
+              "title": "Generator Prototype"
+            }
+          },
+          {
+            "id": "b233b95c9b2fcd87",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Future Power Overview/Game Scene Structure.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Game Scene Structure"
+            }
+          },
+          {
+            "id": "da1a9c513accec02",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Future Power Overview/Game Scene Structure.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Game Scene Structure"
+            }
+          },
+          {
+            "id": "89f11be70e20bfbe",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Future Power Overview/Script Structure.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Script Structure"
+            }
+          },
+          {
+            "id": "da053dd6f7f287fc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Future Power Overview/Game Scene Structure.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Game Scene Structure"
+            }
+          },
+          {
+            "id": "12d9f367294a7f32",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "original front.jpg"
+              },
+              "icon": "lucide-image",
+              "title": "original front"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -62,7 +136,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
             }
           },
           {
@@ -77,7 +153,9 @@
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-search",
+              "title": "Search"
             }
           },
           {
@@ -85,7 +163,9 @@
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {}
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
             }
           }
         ]
@@ -108,7 +188,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Overview/Immediate tasks.md",
+                "file": "original front.jpg",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -116,7 +196,9 @@
                 "searchQuery": "",
                 "backlinkCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for original front"
             }
           },
           {
@@ -125,10 +207,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Overview/Immediate tasks.md",
+                "file": "original front.jpg",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from original front"
             }
           },
           {
@@ -139,7 +223,9 @@
               "state": {
                 "sortOrder": "frequency",
                 "useHierarchy": true
-              }
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
             }
           },
           {
@@ -148,8 +234,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Overview/Immediate tasks.md"
-              }
+                "file": "original front.jpg"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of original front"
             }
           }
         ]
@@ -169,23 +257,30 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "c90bd8550ab84856",
+  "active": "12d9f367294a7f32",
   "lastOpenFiles": [
-    "Overview/Overview.md",
     "original back.jpg",
+    "Future Power Overview/Game Structure and Editable Properties.md",
+    "Future Power Overview/Script Structure.md",
+    "Future Power Overview/Game Scene Structure.md",
+    "Future Power Overview/Suggestions for Future Improvements.md",
+    "Untitled",
+    "Working Notes/Completed Work/Generator Prototype.md",
+    "Working Notes",
+    "Future Power Overview",
+    "Working Notes/Overview/Overview.md",
+    "Working Notes/Overview/Immediate tasks.md",
     "original front.jpg",
-    "Completed Work/System Architecture.md",
-    "Completed Work/Prototype Ui Work - done.md",
-    "Completed Work/Power Consumer prototype.md",
-    "Completed Work/Generator Prototype.md",
     "Pasted image 20240610155635.png",
     "Pasted image 20240421212613.png",
-    "Current Work/Final Ui Drafting.md",
-    "Current Work/3d scene blockout.md",
-    "Overview/Immediate tasks.md",
-    "Completed Work",
-    "Overview",
-    "Current Work",
+    "Working Notes/Completed Work/System Architecture.md",
+    "Working Notes/Completed Work/Prototype Ui Work - done.md",
+    "Working Notes/Completed Work/Power Consumer prototype.md",
+    "Working Notes/Current Work/Final Ui Drafting.md",
+    "Working Notes/Current Work/3d scene blockout.md",
+    "Working Notes/Completed Work",
+    "Working Notes/Overview",
+    "Working Notes/Current Work",
     "Pasted image 20240421110459.png"
   ]
 }

@@ -15,5 +15,5 @@ MonoBehaviour:
   GenName: None
   genCapacity: 0
   responseSpeed: 0
-  initialCost: 0
+  initialCost: 1
   perWattCost: 0

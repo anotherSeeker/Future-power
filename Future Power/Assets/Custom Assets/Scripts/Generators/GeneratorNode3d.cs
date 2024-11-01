@@ -52,11 +52,10 @@ public class GeneratorNode3d : MonoBehaviour
             try
             {
                 TMP_Dropdown dropdown = transform.parent.GetComponent<GenNodeController3d>().dropdown;
-                GameObject canvas = transform.parent.GetComponent<GenNodeController3d>().dropdown.transform.parent.gameObject;
 
                 activeDropdown = dropdown;
 
-                canvas.gameObject.SetActive(true);
+                dropdown.gameObject.SetActive(true);
                 dropdown.Show();
 
                 return activeDropdown;
@@ -81,6 +80,11 @@ public class GeneratorNode3d : MonoBehaviour
     {
         return currentGeneration;
     }*/
+
+    public bool isNoGen()
+    {
+        return noGenerator;
+    }
 
     public float getInitialCost()
     {

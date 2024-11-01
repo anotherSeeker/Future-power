@@ -2,10 +2,12 @@ using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
 using UnityEditor.Experimental.GraphView;
+using System;
 
 public class GenNodeController3d : MonoBehaviour
 {
-    [SerializeField] public List<GameObject> generators;
+    [SerializeField] private List<GameObject> generators;
+    public List<GameObject> workingGenerators;
     private GeneratorDial GenDial;
     [SerializeField] public TMP_Dropdown dropdown;
     [SerializeField] public TMP_Text descriptionUi;
@@ -17,6 +19,7 @@ public class GenNodeController3d : MonoBehaviour
     void Awake()
     {
         setupGenDial();
+        workingGenerators = generators;
         //populateDropdown();
     }
 
@@ -60,54 +63,63 @@ public class GenNodeController3d : MonoBehaviour
         descriptionUi.text = "Target:  "+desiredGeneration.ToString("F2")+"\nCurrent:"+currentGeneration.ToString("F2");
     }
 
-    public void populateDropdown()
+    /*public void populateDropdown()
     {
         dropdown.ClearOptions();
+        workingGenerators = new List<GameObject>();
 
         foreach(GameObject gen in generators)
         {
             dropdown.options.Add(new TMP_Dropdown.OptionData(gen.GetComponent<GeneratorNode3d>().GetName(), gen.GetComponent<GeneratorNode3d>().GetSprite()));
+            workingGenerators.Add(gen);
         }
 
         defaultDropdown();
-    }
+    }*/
 
     public void populateDropdown(Scenario scenario)
     {
+        dropdown.ClearOptions();
+        workingGenerators = new List<GameObject>();
+
         foreach(GameObject gen in generators)
         {
             bool addToDropdown = true;
+            string name = gen.GetComponent<GeneratorNode3d>().GetName();
 
             //an addittedly bad setup to do this check, if there were more time I would rewrite this to be much cleaner
-            if (scenario.banCoal && gen.GetComponent<GeneratorNode3d>().GetName() == "Coal")
+            if (scenario.banCoal && name == "Coal")
             {
                 addToDropdown = false;
             }
-            else if (scenario.banGas && gen.GetComponent<GeneratorNode3d>().GetName() == "Gas")
+            else if (scenario.banGas && name == "Gas")
             {
                 addToDropdown = false;
             }
-            else if (scenario.banNuclear && gen.GetComponent<GeneratorNode3d>().GetName() == "Nuclear")
+            else if (scenario.banNuclear && name == "Nuclear")
             {
                 addToDropdown = false;
             }
-            else if (scenario.banSolar && gen.GetComponent<GeneratorNode3d>().GetName() == "Solar")
+            else if (scenario.banSolar && name == "Solar")
             {
                 addToDropdown = false;
             }
-            else if (scenario.banWind && gen.GetComponent<GeneratorNode3d>().GetName() == "Wind")
+            else if (scenario.banWind && name == "Wind")
             {
                 addToDropdown = false;
             }
-            else if (scenario.banHydro && gen.GetComponent<GeneratorNode3d>().GetName() == "Hydro")
+            else if (scenario.banHydro && name == "Hydro")
             {
                 addToDropdown = false;
             }
 
 
 
-            if (addToDropdown)            
+            if (addToDropdown)
+            {            
                 dropdown.options.Add(new TMP_Dropdown.OptionData(gen.GetComponent<GeneratorNode3d>().GetName(), gen.GetComponent<GeneratorNode3d>().GetSprite()));
+                workingGenerators.Add(gen);
+            }
         }
 
         defaultDropdown();
@@ -118,7 +130,7 @@ public class GenNodeController3d : MonoBehaviour
         dropdown.value = 0;
         ChangeNode();
         
-        dropdown.Show();
+        //dropdown.Show();
     }
 
     public void ChangeNode()
@@ -129,16 +141,19 @@ public class GenNodeController3d : MonoBehaviour
         //zero out the dial
         GenDial.ResetDial();
 
-        Transform childGenerator = GetCurrentGen(transform);
-        Destroy(childGenerator.gameObject);
+        //zero out power generation
+        desiredGeneration = 0;
+            currentGeneration = 0;
 
-        currentGenerator = Instantiate(generators[newChild], transform);
+        //delete old generator
+        GameObject childGenerator = currentGenerator;
+        Destroy(childGenerator);
 
-        GameObject canvas = dropdown.transform.parent.gameObject;
-        canvas.SetActive(false);
-        
+        //make new generator
+        currentGenerator = Instantiate(workingGenerators[newChild], transform);
 
-        Debug.Log(canvas.name+" isActive: "+canvas.activeSelf);
+        //hide dropdown
+        dropdown.gameObject.SetActive(false);
     }
 
     public float GetCurrentPower()
@@ -155,7 +170,7 @@ public class GenNodeController3d : MonoBehaviour
         return GenDial.GetTargetGeneration();
     }
 
-    private Transform GetCurrentGen(Transform parent)
+    /*private Transform GetCurrentGen(Transform parent)
     {
         foreach(Transform child in parent)
         {
@@ -164,7 +179,7 @@ public class GenNodeController3d : MonoBehaviour
         }
 
         return null;
-    }
+    }*/
 
     public float GetMaxPower()
     {

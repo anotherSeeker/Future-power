@@ -14,7 +14,6 @@ public class playerCameraController : MonoBehaviour
 
 
     [SerializeField] private Canvas inGameUI;
-    [SerializeField] private Canvas startMenu;
 
     private Vector3 flyVelocity = new Vector3();
     private float rotVelocityX = 0;
@@ -146,6 +145,7 @@ public class playerCameraController : MonoBehaviour
         if (RaycastFindClickable())
         {
             {
+                
                 if (interactTarget.GetComponent<GeneratorDial>())
                 {
                     interactTarget.GetComponent<GeneratorDial>().selected();

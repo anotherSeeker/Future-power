@@ -108,6 +108,7 @@ MonoBehaviour:
   - {fileID: 7251105571831974986, guid: e2172a4c0ac3ca94ab4bbc7dcd6b7b82, type: 3}
   - {fileID: 5817105790902064890, guid: a712528b8d791a74b8c96a359afaf971, type: 3}
   - {fileID: 1886045820086748787, guid: e7d9c3e16caa9ff43a6f310855e1009c, type: 3}
+  workingGenerators: []
   dropdown: {fileID: 8858290157606225706}
   descriptionUi: {fileID: 1484345942224726212}
   currentGenerator: {fileID: 5217954178437883856}
@@ -756,7 +757,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4688521005538272812, guid: 786d242e188469f48af427055106b9c4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4690662637762306903, guid: 786d242e188469f48af427055106b9c4, type: 3}
       propertyPath: m_Size
@@ -768,7 +769,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5261079751184398925, guid: 786d242e188469f48af427055106b9c4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5426843288311487832, guid: 786d242e188469f48af427055106b9c4, type: 3}
       propertyPath: m_Sprite
