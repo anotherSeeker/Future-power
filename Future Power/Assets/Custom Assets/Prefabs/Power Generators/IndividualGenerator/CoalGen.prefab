@@ -91,7 +91,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -100,9 +100,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 13b648b5cd2eab04884d33743199a0da, type: 2}
+  - {fileID: 2100000, guid: ce5da791135bd864bbf52cdec5abb83f, type: 2}
   - {fileID: 2100000, guid: 7e9b96aff0837cb44b78b465887e8e2a, type: 2}
-  - {fileID: 2100000, guid: f4c0ee84d5f94294f862db139cdcbc22, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -139,7 +138,6 @@ MonoBehaviour:
   generator: {fileID: 11400000, guid: a003e5dca7a1d25488dbef09149708a7, type: 2}
   noGenerator: 0
   genSprite: {fileID: 21300000, guid: 5cd9644772b573247b71bce419f7537a, type: 3}
-  targetGeneration: 0
   currentGeneration: 0
 --- !u!65 &6004001005949313193
 BoxCollider:

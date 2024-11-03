@@ -162,15 +162,15 @@ public class GameBoard : MonoBehaviour
             {
                 if (!genController.hasTwoRenewables())
                 {
-                    descriptionFront.text = "Scenario requires 2 Renewables\nReq.: "+reqPower.ToString("F2")+" Gen.: "+genPower.ToString("F2");
-                    descriptionBack.text = "Scenario requires 2 Renewables\nReq.: "+reqPower.ToString("F2")+" Gen.: "+genPower.ToString("F2");
+                    descriptionFront.text = "Scenario Requires 2 Renewables\nReq.: "+reqPower.ToString("F2")+" Gen.: "+genPower.ToString("F2");
+                    descriptionBack.text = "Scenario Requires 2 Renewables\nReq.: "+reqPower.ToString("F2")+" Gen.: "+genPower.ToString("F2");
                     winButton.gameObject.SetActive(false);
                     return score;
                 }
             }
                 //we are allowed to save this score and win the game
-                descriptionFront.text = "Score: "+score.ToString("F2")+"Req.: "+reqPower.ToString("F2")+"\nGen.: "+genPower.ToString("F2");
-                descriptionBack.text = "Score: "+score.ToString("F2")+"Req.: "+reqPower.ToString("F2")+"\nGen.: "+genPower.ToString("F2");
+                descriptionFront.text = "Score: "+score.ToString("F2")+"\nReq.: "+reqPower.ToString("F2")+" Gen.: "+genPower.ToString("F2");
+                descriptionBack.text = "Score: "+score.ToString("F2")+"\nReq.: "+reqPower.ToString("F2")+" Gen.: "+genPower.ToString("F2");
 
                 winButton.gameObject.SetActive(true);           
         }

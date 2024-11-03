@@ -1,8 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
-using System;
 
 public class GenNodeController3d : MonoBehaviour
 {
@@ -63,7 +61,7 @@ public class GenNodeController3d : MonoBehaviour
         descriptionUi.text = "Target:  "+desiredGeneration.ToString("F2")+"\nCurrent:"+currentGeneration.ToString("F2");
     }
 
-    /*public void populateDropdown()
+    /*public void populateDropdown() 
     {
         dropdown.ClearOptions();
         workingGenerators = new List<GameObject>();

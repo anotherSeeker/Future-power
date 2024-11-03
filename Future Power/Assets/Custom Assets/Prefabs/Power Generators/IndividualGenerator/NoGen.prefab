@@ -663,7 +663,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
+  m_StaticShadowCaster: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -672,9 +672,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 13b648b5cd2eab04884d33743199a0da, type: 2}
+  - {fileID: 2100000, guid: ce5da791135bd864bbf52cdec5abb83f, type: 2}
   - {fileID: 2100000, guid: d86620bc3e6f7ba4ca00bcdd6e41a7ca, type: 2}
-  - {fileID: 2100000, guid: f4c0ee84d5f94294f862db139cdcbc22, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

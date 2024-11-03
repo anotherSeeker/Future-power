@@ -28,7 +28,7 @@ Material:
   - _EMISSION
   - _RECEIVE_SHADOWS_OFF
   m_InvalidKeywords: []
-  m_LightmapFlags: 1
+  m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -44,5 +44,6 @@ Material:
     - _Cull: 2
     - _ReceiveShadows: 0
     - _Smoothness: 0.663
-    m_Colors: []
+    m_Colors:
+    - _EmissionColor: {r: 8, g: 7.620693, b: 3.8113208, a: 1}
   m_BuildTextureStacks: []

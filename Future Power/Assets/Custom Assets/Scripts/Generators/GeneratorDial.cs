@@ -1,8 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GeneratorDial : MonoBehaviour
@@ -11,13 +6,13 @@ public class GeneratorDial : MonoBehaviour
     [SerializeField] private float baseRotationSpeed = 1f;
     [SerializeField] private float slowSpinMultiplier = 0.1f;
     [SerializeField] private int numRotationsForFullPower = 4;
-    [SerializeField] private Light selectedLight;
-    private Boolean isSelected = false;
+    //[SerializeField] private Light selectedLight;
+    //private Boolean isSelected = false;
 
     void Update()
     {
-        if (selectedLight)
-            selectedLight.gameObject.SetActive(isSelected);
+        //if (selectedLight)
+            //selectedLight.gameObject.SetActive(isSelected);
     }
 
     //max value of 1 min of 0; we'll increment by a value depending on if we're 
@@ -89,11 +84,25 @@ public class GeneratorDial : MonoBehaviour
     }
     public void selected()
     {
-        isSelected = true;
+        //turns on the dial glow when clicked
+        Material dialMat = GetComponent<Renderer>().material;
+        if (dialMat.HasFloat("_Glow"))
+        {
+            dialMat.SetFloat("_Glow",1);
+        }
+
+        //isSelected = true;
     }
     public void deselected()
     {
-        isSelected = false;
+        //turns off the dial glow when released
+        Material dialMat = GetComponent<Renderer>().material;
+        if (dialMat.HasFloat("_Glow"))
+        {
+            dialMat.SetFloat("_Glow",0);
+        }
+
+        //isSelected = false;
     }
 }
 
