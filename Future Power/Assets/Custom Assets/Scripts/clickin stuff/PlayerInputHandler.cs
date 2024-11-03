@@ -33,6 +33,8 @@ public class PlayerInputHandler : MonoBehaviour
 
     public static PlayerInputHandler Instance {get; private set;}
 
+    public static Boolean isSetup = false;
+
     private void OnEnable()
     {   
         clickAction.Enable(); 
@@ -45,44 +47,35 @@ public class PlayerInputHandler : MonoBehaviour
     {   
         clickAction.Disable(); 
         dialSpeedAction.Disable();  
-        moveAction.Disable();
-        lookAction.Disable();
+        //moveAction.Disable();
+        //lookAction.Disable();
     }
 
+
+    //action setup from action map, uses instances to check if we're reloading the scene and if we are don't setup again
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
             //DontDestroyOnLoad(gameObject);
+
+            clickAction = playerControls.FindActionMap(actionMapName).FindAction(click);
+            moveAction  = playerControls.FindActionMap(actionMapName).FindAction(move);
+            lookAction  = playerControls.FindActionMap(actionMapName).FindAction(look); 
+            dialSpeedAction = playerControls.FindActionMap(actionMapName).FindAction(dialSpeed);
+
+            clickAction.Enable();
+            dialSpeedAction.Enable(); 
+            moveAction.Enable();
+            lookAction.Enable();
         }
         else
         {
+            isSetup = true;
             Destroy(gameObject);
         }
 
-        clickAction = playerControls.FindActionMap(actionMapName).FindAction(click);
-        moveAction  = playerControls.FindActionMap(actionMapName).FindAction(move);
-        lookAction  = playerControls.FindActionMap(actionMapName).FindAction(look); 
-        dialSpeedAction = playerControls.FindActionMap(actionMapName).FindAction(dialSpeed);
-
-        clickAction.Enable();
-        dialSpeedAction.Enable(); 
-        moveAction.Enable();
-        lookAction.Enable();
-    }
-
-    private void Update()
-    {
-        RegisterMoveAndLookActions();
-    }
-
-    void RegisterMoveAndLookActions()
-    {
-        moveAction.performed    += context => moveInput = context.ReadValue<Vector2>();
-        moveAction.canceled     += context => moveInput = Vector2.zero;
-
-        lookAction.performed    += context => lookInput = context.ReadValue<Vector2>();
-        lookAction.canceled     += context => lookInput = Vector2.zero;
+        
     }
 }

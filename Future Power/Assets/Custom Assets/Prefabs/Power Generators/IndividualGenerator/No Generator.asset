@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GenName: None
   genCapacity: 0
-  responseSpeed: 0
+  responseSpeed: 1e+10
   initialCost: 1
   perWattCost: 0

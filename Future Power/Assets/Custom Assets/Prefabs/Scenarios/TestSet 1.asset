@@ -15,7 +15,7 @@ MonoBehaviour:
   GenName: Scenario 4
   numDomestic1: 1
   numDomestic2: 0
-  numLightInd: 0
+  numLightInd: 1
   numCommercial: 0
   numHeavyInd: 0
   numServices: 0
