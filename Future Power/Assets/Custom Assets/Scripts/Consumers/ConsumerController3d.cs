@@ -128,7 +128,11 @@ public class ConsumerController3d : MonoBehaviour
                 //makes the node a required node
                 child.GetComponent<ConsumerNode>().required = true;
                 count++;
+                
+                child.GetComponent<ConsumerNode>().SetColour();
             }
+
+            
         }
     }
 

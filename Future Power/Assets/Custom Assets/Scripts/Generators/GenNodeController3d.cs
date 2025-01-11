@@ -128,7 +128,8 @@ public class GenNodeController3d : MonoBehaviour
         dropdown.value = 0;
         ChangeNode();
         
-        //dropdown.Show();
+        dropdown.Show();
+        dropdown.Hide();
     }
 
     public void ChangeNode()
@@ -151,6 +152,7 @@ public class GenNodeController3d : MonoBehaviour
         currentGenerator = Instantiate(workingGenerators[newChild], transform);
 
         //hide dropdown
+        dropdown.Hide();
         dropdown.gameObject.SetActive(false);
     }
 

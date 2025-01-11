@@ -3,28 +3,30 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 using System.Collections.Generic;
+
 
 public class playerCameraController : MonoBehaviour 
 {
     [SerializeField] private float flySpeed = 0.5f;
     [SerializeField] private float rotSpeed = 45.0f;
-    [SerializeField] private float moveTime = 1;
+    [SerializeField] private float moveTime = 1; 
 
-
-    [SerializeField] private Canvas inGameUI;
+    private Vector3 currentMovementVector = new Vector3(0,0,0);
 
     private Vector3 flyVelocity = new Vector3();
     private float rotVelocityX = 0;
     private float rotVelocityY = 0;
     private float rotVelocityZ = 0;
     
+    [SerializeField] private Canvas inGameUI;
+    [SerializeField] private Canvas tutorialUI;
+    
     private bool isGameStartPath = true;
+    private bool isTutorialPath = false;
     private  Boolean isTraversingPath = false;
     private int finalTargetPoint = 0;
     private int currentTargetPoint = 0;
-
     [SerializeField] private bool useDebugFly = false;
     //[SerializeField] private float sensitivity = 0.2f;
     //[SerializeField] private float upDownRange = 80.0f;
@@ -34,44 +36,63 @@ public class playerCameraController : MonoBehaviour
     [SerializeField] private GameObject gameCameraFlyPoints;
     [SerializeField] private GameObject menuCameraFlyPoints;
 
+
     private bool isSlowDial = false;
 
     private List<Transform> menuPoints = new List<Transform>();
     private List<Transform> gamePoints = new List<Transform>();
-
-
-    [SerializeField] private Button inGameFlyButton;
-
+    private List<Transform> tutorialPoints = new List<Transform>();
 
     private bool clickHeld = false;
     private float clickHeldStartTime = 0;
     private Vector2 initialClickLocation;
 
-    private Vector3 currentMovementVector = new Vector3(0,0,0);
+    
     private GameObject interactTarget;
     private Camera mainCamera;
     private PlayerInputHandler inputHandler;
     private static TMP_Dropdown activeDropdown = null;
 
+    //used to track if we should register our input callbacks
+    private Boolean shouldReregister = false;
+
     private void Start()
     {
+        //sets up actions and postions the camera in the starting location
         mainCamera = Camera.main;
+
         inputHandler = PlayerInputHandler.Instance;
         SetupClickActions();
 
         defaultPosition();
     }
 
+    void OnEnable()
+    {
+        //setsup actions after being disabled
+        if (shouldReregister)
+        {
+            SetupClickActions();
+            shouldReregister = false;
+        }
+    }
+
+    void OnDisable()
+    {
+        unregisterClickActions();
+        shouldReregister = true;
+    }
+
     void Update()
     {
-        if (isGameStartPath)
+        /*if (isGameStartPath)
         {
-            inGameUI.enabled = false;
+            //inGameUI.enabled = false;
         }
         else
         {
-            inGameUI.enabled = true;       
-        }
+            //inGameUI.enabled = true;       
+        }*/
         
         HandleMovement();
         updateHoldClick();
@@ -122,13 +143,25 @@ public class playerCameraController : MonoBehaviour
     }
 
     private void SetupClickActions()
-    {        
+    {
+        //reloading the scene results in these actions being added as a callback on click twice, we only want these happening the once when clicked    
         inputHandler.clickAction.started    += OnClick;
         inputHandler.clickAction.canceled   += OnCancelClick;
 
         inputHandler.dialSpeedAction.performed    += context => isSlowDial = true;
         inputHandler.dialSpeedAction.canceled     += context => isSlowDial = false;
     }
+
+    private void unregisterClickActions()
+    {
+        //reloading the scene results in these actions being added as a callback on click twice, we only want these happening the once when clicked    
+        inputHandler.clickAction.started    -= OnClick;
+        inputHandler.clickAction.canceled   -= OnCancelClick;
+
+        inputHandler.dialSpeedAction.performed    -= context => isSlowDial = true;
+        inputHandler.dialSpeedAction.canceled     -= context => isSlowDial = false;
+    }
+
 
     private void OnClick(InputAction.CallbackContext context)
     {
@@ -234,7 +267,25 @@ public class playerCameraController : MonoBehaviour
         {
             finalTargetPoint = 0;
         }
+    }
 
+    public void startTutorialMove()
+    {
+        isTraversingPath = true;
+        isTutorialPath = true;
+
+        if (finalTargetPoint == 0)
+        {
+            //arrays start at 0 count starts at 1
+            if (isGameStartPath)
+                finalTargetPoint = menuPoints.Count-1;
+            else
+                finalTargetPoint = gamePoints.Count-1;
+        }
+        else
+        {
+            finalTargetPoint = 0;
+        }
     }
 
     public void updateCameraPos()
@@ -258,7 +309,11 @@ public class playerCameraController : MonoBehaviour
                     //also enable the in game ui
                     currentTargetPoint = 0;
                     finalTargetPoint = 0;
-                    inGameUI.gameObject.SetActive(true);
+                    //we have other ui elements for the tutorial
+                    if (!isTutorialPath)
+                        inGameUI.gameObject.SetActive(true);
+                    else
+                        tutorialUI.gameObject.SetActive(true);
                     return;
                 }
                 else

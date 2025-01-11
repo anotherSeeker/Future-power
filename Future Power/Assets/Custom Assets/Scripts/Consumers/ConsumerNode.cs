@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class ConsumerNode : MonoBehaviour
@@ -14,7 +15,7 @@ public class ConsumerNode : MonoBehaviour
     [SerializeField] private String resetTrigger = "Reset";
     private Animator animController;
 
-    private bool onState = false;
+    [SerializeField] private bool onState = false;
 
     void Start()
     {  
@@ -23,11 +24,13 @@ public class ConsumerNode : MonoBehaviour
 
     void Update()
     {
-        SetColour();
+        //technically inefficient, fixes some issues with switching on click where colours can get stuck in the wrong state
+        //SetColour();
     }
 
     public float getRequestedPower()
     {
+        //called by the controller returning current generation
         if (onState)
             return consumer.powerDraw;
 
@@ -44,7 +47,7 @@ public class ConsumerNode : MonoBehaviour
         this.onState = state;
     }
 
-    private void SetColour()
+    public void SetColour()
     {
         //swap ring colours
         List<Material> newMaterials = new List<Material>();
@@ -71,13 +74,13 @@ public class ConsumerNode : MonoBehaviour
         }
         else
         {
-            Debug.Log("animController.IsInTransition(0) is true");
+            Debug.Log("lever is animating");
         }
     }
 
     public void onClick()
     {
-        Debug.Log("ConsNode: "+name+"was clicked on");
+        //Debug.Log("ConsNode: "+name+"was clicked on");
         toggleState();
     } 
 
